@@ -1,0 +1,152 @@
+#include <iostream>
+using namespace std;
+int main(){
+    int suma=0;
+int k=0;
+for(int i=0;i<51;i++){
+        k=2*i;
+    suma=suma+k;
+}
+cout<<suma<<endl;
+}
+
+#include <iostream>
+using namespace std;
+
+int main(){
+int a=0;
+int b=0;
+cout<<"ingrese el primer numero: ";
+cin>>a;
+cout<<"ingrese el segundo numero: ";
+cin>>b;
+cout<<"el producto es: "<<a*b<<endl;
+
+}
+
+#include<iostream>
+using namespace std;
+
+int main(){
+string nombre;
+string apellidop;
+string apellidom;
+
+cout<<"ingrese primer nombre: ";
+cin>>nombre;
+cout<<"ingrese apellido paterno: ";
+cin>>apellidop;
+cout<<"ingrese apellido materno: ";
+cin>>apellidom;
+cout<<"correo UNSA: "<<nombre[0]<<apellidop<<apellidom[0]<<"@unsa.edu.pe";
+}
+
+#include<iostream>
+using namespace std;
+
+int main(){
+
+for(int i=3;i<51;i++){
+        int aux=0;
+    for(int j=2;j<i;j++){
+        aux=(i%j)+aux;
+    if(aux==0){
+        cout<<"primo: "<<i<<endl;
+    }
+
+
+    }
+}
+}
+
+
+#include<iostream>
+using namespace std;
+
+int main(){
+for(int i=1;i<21;i++){
+    cout<<5*i<<endl;
+}
+}
+
+
+
+
+#include<iostream>
+using namespace std;
+
+int main(){
+
+}
+
+
+8.	Escriba un código que solicite una cantidad de minutos específica y muestre como
+resultado la hora y fecha resultante tomando como referencia la hora y fecha actual y restarle el tiempo indicado.
+
+
+
+
+
+
+9.	Elabore un código que reciba como entrada una secuencia de caracteres que contiene un
+numero flotante y retorne el número redondeado.
+
+
+
+
+
+10.	Elabore un código que solicite un numero entre 100 < x < 999 y muestre el resultado en binario.
+
+11.	Elabore un programa que lea n números y determine cuál es el mayor, el menor y la media de los números leídos.
+
+12.	Elabore un programa que calcule la serie de Fibonacci. La serie de Fibonacci es
+la sucesión de números: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ... Cada número se calcula sumando los dos anteriores a él.
+
+13.	Elabore un algoritmo que lea por teclado dos números enteros y determine si uno es divisor del otro.
+
+14.	Calcula el promedio de 3 notas para n estudiantes.
+
+#include<iostream>
+using namespace std;
+
+int main(){
+float n1;
+float n2;
+float n3;
+int al;
+cout<<"ingrese el numero de estudiantes: ";
+cin>>al;
+float matriz[al][3];
+for(int i=0;i<al;i++){
+        float promedio=0;
+    for(int j=0;j<3;j++){
+            cout<<"ingrese la nota "<<j+1<<" : ";
+    cin>>matriz[i][j];
+    promedio=promedio+matriz[i][j];
+        }
+        cout<<"el promedio es: "<<promedio/3<<endl;
+}
+
+}
+
+
+15.	Escribir un programa que genere la tabla de multiplicar de un número introducido por el teclado.
+
+#include<iostream>
+using namespace std;
+
+int main(){
+
+int n;
+int cota;
+
+cout<<"ingrese numero a generar tabla: ";
+cin>>n;
+cout<<"ingrese hasta que valor desa saber la tabla de multiplicar: ";
+cin>>cota;
+
+for(int i=0;i<(cota/n);i++)
+{
+    cout<<n*i<<endl;
+}
+}
