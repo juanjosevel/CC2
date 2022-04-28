@@ -1,0 +1,219 @@
+Resolver los siguientes ejercicios planteados:
+1. Hacer un programa que sin usar la función pow(), pero por medio de una función,
+calcule la potencia de un número (ambos números ingresados por teclado).
+
+#include <iostream>
+using namespace std;
+
+void potencia(int a, int b){
+    int temp=1;
+
+    for(int i=0;i<b;i++)
+    {
+        temp=a*temp;
+    }
+cout<<temp;
+}
+
+int main(){
+int a;
+int b;
+
+cout<<"Ingrese el numero base: ";
+cin>>a;
+cout<<"Ingrese el exponente: ";
+cin>>b;
+potencia(a,b);
+}
+
+
+2. Hacer un programa que lea por teclado un año, calcule y muestre si es bisiesto. Para
+realizar el cálculo utiliza una función llamada bisiesto. La función bisiesto recibe el año leído
+por teclado, comprueba si es o no bisiesto.
+
+#include <iostream>
+using namespace std;
+
+void bisiesto(int a){
+if(a%400==0){
+    cout<<a<<" si es bisiesto";
+}
+else if(a%100==0){
+    cout<<a<<" no es bisiesto";
+}
+else if(a%4==0){
+    cout<<a<<" si es bisiesto";
+}
+else{
+    cout<<a<<" no es bisiesto";
+}
+
+}
+
+int main(){
+    int a;
+cout<<"Ingrese el anio a analizar: ";
+cin>>a;
+bisiesto(a);
+
+}
+
+3. Hacer un programa que lee por teclado la fecha actual y la fecha de nacimiento de una persona
+y por medio de una función calcule su edad en años, meses y días.
+
+
+#include <iostream>
+using namespace std;
+
+void EdadActual(int dia, int mes, int year, int diaa, int mesa, int yeara){
+    int edaddia, edadmes, edadanio;
+
+    int resto=0;
+    int aux1, aux2, aux3;
+    aux1=yeara-year;
+    aux2=mes-mesa;
+    aux3=dia-diaa;
+    if(mes==1)
+        resto=31-dia;
+    if(mes==2)
+        resto=28-dia;
+    if(mes==3)
+        resto=31-dia;
+    if(mes==4)
+        resto=30-dia;
+    if(mes==5)
+        resto=31-dia;
+    if(mes==6)
+        resto=30-dia;
+    if(mes==7)
+        resto=31-dia;
+    if(mes==8)
+        resto=31-dia;
+    if(mes==9)
+        resto=30-dia;
+    if(mes==10)
+        resto=31-dia;
+    if(mes==11)
+        resto=30-dia;
+    if(mes==12)
+        resto=31-dia;
+
+    if(aux2==0 && aux3>0){
+        edadanio=aux1-1;
+        edaddia=365-aux3;
+        edadmes=11;
+    }
+    else if(aux2==0 && aux3<0){
+        edadanio=aux1;
+        edaddia=aux3*(-1);
+        edadmes=12;
+    }
+    else if(aux2>0){
+        edadanio=aux1-1;
+        edadmes=12-aux2;
+        edaddia=diaa+resto;
+    }
+    else if(aux2<0){
+        edadanio=aux1;
+        edadmes=aux2*(-1);
+        edaddia=diaa+resto;
+    }
+
+cout<<"la persona tiene "<<edadanio<<" anios, "<<edadmes<<" meses, "<<edaddia<<" dias";
+}
+
+int main(){
+
+int dia, mes, year;
+int diaa, mesa, yeara;
+
+cout<<"dia actual?: ";
+cin>>diaa;
+cout<<"mes actual?: ";
+cin>>mesa;
+cout<<"anio actual?: ";
+cin>>yeara;
+
+cout<<"dia de nacimiento?: ";
+cin>>dia;
+cout<<"mes de nacimiento?: ";
+cin>>mes;
+cout<<"anio de nacimiento?: ";
+cin>>year;
+
+EdadActual(dia,mes,year,diaa,mesa,yeara);
+
+}
+
+4. Hacer un programa que desarrolle una función, que genere en pantalla el listado de números primos
+ubicados entre 1 hasta un numero x (x es ingresado por teclado).
+
+
+#include <iostream>
+using namespace std;
+
+void primos(int b){
+    int a=2;
+  bool primo=true;
+
+  while(a<b) {
+    primo=true;
+    if(a==0|a==1){
+      primo=false;
+    }
+    for(int i=2;i<=a/2;i++) {
+      if(a%i==0){
+        primo=false;
+        break;
+      }
+    }
+    if(primo)
+      cout<<a<<", ";
+    a++;
+  }
+}
+
+int main(){
+int a;
+cout<<"x?: ";
+cin>>a;
+primos(a);
+}
+
+
+
+5. Desarrollar un programa, utilizando funciones con un tipo de retorno, con las siguientes opciones:
+a. Introducir un valor x entero comprendido entre 0 y 100.
+b. Validar que sea un valor par.
+c. Sumar todos los números impares desde el 0 hasta el valor de x.
+
+
+#include <iostream>
+using namespace std;
+
+int validarpar(int a){
+ if(a%2==0)
+    cout<<a<<" es un numero par"<<endl;
+ else{
+    cout<<a<<" no es un numero par"<<endl;
+ }
+}
+
+int suma(int a){
+    int addic=0;
+    for(int i=0;i<a+1;i++){
+        addic=addic+i;
+
+    }
+return addic;
+}
+
+int main(){
+
+int a,k,s;
+cout<<"ingrese un valor entre 0 y 100: ";
+cin>>a;
+k=validarpar(a);
+s=suma(a);
+cout<<"la suma de 1 hasta "<<a<<" es "<<s;
+}
