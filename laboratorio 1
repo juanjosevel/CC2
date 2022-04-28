@@ -35,16 +35,6 @@ cin>>apellidom;
 cout<<"correo UNSA: "<<nombre[0]<<apellidop<<apellidom[0]<<"@unsa.edu.pe";
 }
 
- 
-
-3.	Elabore un programa que solicite ingresar una hora del día (HH:MM en formato de cadena), 
-solicite un tiempo en minutos a agregar, y retorne la hora de finalización (el formato de salida debe de estar en AM o PM según corresponda).
-
-
-4.	Escriba un código que solicite una cantidad de minutos específica y muestre como resultado la hora y fecha 
-resultante tomando como referencia la hora y fecha actual y restarle el tiempo indicado.
-5.	Elabore un código que reciba como entrada una secuencia de caracteres que contiene un numero flotante y retorne el número redondeado.
-6.	Elabore un código que solicite un numero entre 100 < x < 999 y muestre el resultado en binario.
 
 7.	Elabore un algoritmo que lea por teclado dos números enteros y determine si uno es divisor del otro.
 
@@ -80,9 +70,6 @@ else{
 
 8.	Escribir un programa que calcule la media de x cantidad números introducidos por el teclado.
 
-SOLUCIÓN:
-
-Código implementado en C++
 
 #include<iostream>
 using namespace std;
@@ -99,5 +86,3 @@ for(int i=0;i<x;i++){
 }
 
 
-9.	Escribir un programa que lea 10 datos desde el teclado y sume sólo aquellos que sean negativos.
-10.	Escribir un programa que almacene la cadena de caracteres contraseña en una variable, pregunte al usuario por la contraseña hasta que introduzca la contraseña correcta.
