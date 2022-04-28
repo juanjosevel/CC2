@@ -1,0 +1,125 @@
+Resolver los siguientes ejercicios planteados:
+1.	Sumar todos los enteros pares desde 2 hasta 100.
+
+#include <iostream>
+using namespace std;
+int main(){
+    int suma=0;
+int k=0;
+for(int i=0;i<51;i++){
+        k=2*i;
+    suma=suma+k;
+}
+cout<<suma<<endl;
+}
+
+
+2.	Calcule los primeros 50 números primos y muestre el resultado en pantalla.
+
+#include <iostream>
+using namespace std;
+
+int main(){
+  int k=0;
+  bool primo=true;
+  int n=2;
+
+while(k<50){
+        primo=true;
+      for (int i=2;i<=n/2;i++){
+      if (n%i==0){
+        primo=false;
+        break;
+      }
+    }
+    if(primo){
+     k++;
+      cout<<n<<", ";
+    }
+    n=n+1;
+}
+}
+
+
+3.	Escribir un programa que visualice en pantalla los números múltiplos de 5 comprendidos entre 1 y 100.
+
+#include<iostream>
+using namespace std;
+
+int main(){
+for(int i=1;i<21;i++){
+    cout<<5*i<<endl;
+}
+}
+
+
+4.	Escriba un código que solicite ingresar dos números 𝑥 y 𝑦, tal que 𝑥 < 𝑦. Muestre todos los números primos que se encuentren entre el rango de valores, de no encontrarse, mostrar el primo más cercano a 𝑥 o 𝑦.
+
+#include <iostream>
+using namespace std;
+
+int main() {
+
+  int i;
+  bool primo=true;
+  int a,b;
+
+  cout<<"Ingrese el primer numero: ";
+  cin>>a;
+  cout<<"Ingrese otro numero mayor al anterior: ";
+  cin>>b;
+
+  while(a<b) {
+    primo=true;
+    if(a==0|a==1){
+      primo=false;
+    }
+    for(int i=2;i<=a/2;i++) {
+      if(a%i==0){
+        primo=false;
+        break;
+      }
+    }
+    if(primo)
+      cout<<a<<", ";
+    a++;
+  }
+}
+
+
+5.	Elabore un programa que lea n números y determine cuál es el mayor, el menor y la media de los números leídos.
+6.	Elabore un programa que calcule la serie de Fibonacci. La serie de Fibonacci es la sucesión de números: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ... Cada número se calcula sumando los dos anteriores a él.
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int fib;
+    int a=0;
+    int b=1;
+    int siguiente=0;
+    cout<<"numero de terminos de Fibonacci?: ";
+    cin>>fib;
+    cout <<"0, 1, ";
+
+
+    for (int i=0;i<fib-2;i++) {
+        siguiente=a+b;
+        a=b;
+        b=siguiente;
+        cout<<siguiente<<", ";
+    }
+    return 0;
+}
+
+
+7.	Calcula el promedio de 3 notas para n estudiantes.
+
+8.	Escribir un programa que genere la tabla de multiplicar de un número introducido por el teclado.
+9.	Escribir un programa que pida al usuario un número entero y muestre por pantalla un triángulo rectángulo como el de más abajo, de altura el número introducido.
+*
+**
+***
+****
+*****
+10.	Escribir un programa que pida al usuario una palabra y luego muestre por pantalla una a una las letras de la palabra introducida empezando por la última.
