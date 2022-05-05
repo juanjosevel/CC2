@@ -1,0 +1,303 @@
+#include <iostream>
+using namespace std;
+
+/////////////////////////
+//EJERCICIO 1
+/////////////////////////
+
+
+void uno(){
+
+string matriz[3][4];
+for(int i=0;i<3;i++){
+        cout<<"ingrese el nombre de la persona "<<i+1<<" :";
+        cin>>matriz[i][0];
+        cout<<"ingrese el apellido de la persona "<<i+1<<" :";
+        cin>>matriz[i][1];
+        cout<<"ingrese la edad de la persona "<<i+1<<" :";
+        cin>>matriz[i][2];
+        cout<<"ingrese el dni de la persona "<<i+1<<" :";
+        cin>>matriz[i][3];
+}
+cout<<"Datos completos de las 3 personas."<<endl;
+
+for(int i=0;i<3;i++){
+        cout<<"Persona "<<i+1<<" Nombre: "<<matriz[i][0]<<" Apellido:"<<matriz[i][1]<<" Edad: "<<matriz[i][2]<<" DNI: "<<matriz[i][3]<<endl;
+}
+}
+
+
+/////////////////////////
+//EJERCICIO 2
+/////////////////////////
+
+
+int buscar(int a,int arr[]){
+for(int i=0;i<8;i++){
+    if(a==arr[i]){
+        cout<<"Verdadero";
+        break;
+    }
+    else{
+        cout<<"Falso";
+        break;
+            }
+}
+}
+
+void dos(){
+int arr[]={2,5,8,12,15,19,54,87};
+int a;
+cout<<"ingrese el numero a buscar: ";
+cin>>a;
+cout<<"elementos del arreglo: "<<endl;
+for(int i=0;i<8;i++)
+    cout<<arr[i]<<endl;
+buscar(a,arr);
+}
+
+
+/////////////////////////
+//EJERCICIO 3
+/////////////////////////
+
+
+void tres(){
+int suma;
+int matriz[5][3];
+for(int i=0;i<5;i++){
+    for(int j=0;j<3;j++){
+        cout<<"Ingrese el elemento "<<i<<" "<<j<<" de la matriz: ",
+        cin>>matriz[i][j];
+    }
+}
+
+for(int i=0;i<5;i++){
+        suma=0;
+    for(int j=0;j<3;j++){
+        if(i%2==0){
+            suma=suma+matriz[i][j];
+        }
+    }
+    if(i%2==0){
+cout<<"la suma de la fila par "<<i<<" es: "<<suma<<endl;
+}
+}
+}
+
+
+
+/////////////////////////
+//EJERCICIO 4
+/////////////////////////
+
+void cuatro(){
+  int k=0;
+  bool primo=true;
+  int n=2;
+  int arr[25];
+
+while(k<25){
+        primo=true;
+      for (int i=2;i<=n/2;i++){
+      if (n%i==0){
+        primo=false;
+        break;
+      }
+    }
+    if(primo){
+     k++;
+      //cout<<n<<", ";
+      arr[k]=n;
+    }
+    n=n+1;
+}
+
+for(int i=1;i<25;i++){
+    cout<<arr[i]<<endl;
+}
+}
+
+
+
+/////////////////////////
+//EJERCICIO 6
+/////////////////////////
+
+void seis(){
+
+int matriz[3][3];
+int suma;
+int v[3];
+
+for(int i=0;i<3;i++){
+    for(int j=0;j<3;j++){
+        cout<<"ingrese los numeros a almacenar: ";
+        cin>>matriz[i][j];
+    }
+}
+
+for(int i=0;i<3;i++){
+        suma=0;
+    for(int j=0;j<3;j++){
+        suma=matriz[i][j]+suma;
+    }
+    v[i]=suma;
+}
+
+
+if(v[0]>v[1] && v[0]>v[2])
+    cout<<v[0]<<"es el mayor valor de suma";
+if(v[1]>v[0] && v[1]>v[2])
+    cout<<v[1]<<"es el mayor valor de suma";
+if(v[2]>v[1] && v[2]>v[0])
+    cout<<v[2]<<"es el mayor valor de suma";
+}
+
+
+/////////////////////////
+//EJERCICIO 7
+/////////////////////////
+
+
+void mostrar(int M[3][3],int f,int c)
+{
+    for(int i=0;i<f;i++)
+    {
+        for(int j=0;j<c;j++)
+            cout<<M[i][j]<<"\t";
+        cout<<endl;
+    }
+}
+
+intercambiarfila(int M[3][3],int a,int b){
+    int aux[3];
+
+    for(int i=0;i<3;i++)
+    {
+        for(int j=0;j<3;j++){
+            aux[j]=M[a][j];
+            M[a][j]=M[b][j];
+            M[b][j]=aux[j];
+
+        }
+    }
+
+}
+
+intercambiarcolumna(int M[3][3],int a,int b){
+    int aux[3];
+
+    for(int i=0;i<3;i++)
+    {
+        for(int j=0;j<3;j++){
+            aux[j]=M[j][a];
+            M[j][a]=M[j][b];
+            M[j][b]=aux[j];
+
+        }
+    }
+
+}
+
+void siete(){
+
+int matriz[3][3];
+int f1,f2;
+int c1,c2;
+
+for(int i=0;i<3;i++){
+    for(int j=0;j<3;j++){
+        cout<<"ingrese los valores de la matriz: ";
+        cin>>matriz[i][j];
+    }
+}
+cout<<"La matriz original es: "<<endl;
+mostrar(matriz,3,3);
+cout<<"ingrese las filas que quiere intercambiar: ";
+cin>>f1;
+cin>>f2;
+intercambiarfila(matriz,f1,f2);
+cout<<"la nueva matriz es: "<<endl;
+mostrar(matriz,3,3);
+cout<<"ingrese las columnas que quiere intercambiar: ";
+cin>>c1;
+cin>>c2;
+intercambiarcolumna(matriz,c1,c2);
+cout<<"la nueva matriz es: "<<endl;
+mostrar(matriz,3,3);
+}
+
+
+
+
+
+
+
+
+
+int main(){
+    int opc;
+
+	do{ cout<<"L A B O R A T O R I O   4"<<endl;
+	cout<<endl;
+        cout<<"MENU: "<<endl;
+    cout<<endl;
+		cout<<"1. Ejercicio 1"<<endl;
+        cout<<"2. Ejercicio 2"<<endl;
+        cout<<"3. Ejercicio 3"<<endl;
+        cout<<"4. Ejercicio 4"<<endl;
+        cout<<"6. Ejercicio 6"<<endl;
+        cout<<"7. Ejercicio 7"<<endl;
+		cout<<"8. Salir"<<endl;
+		cout<<endl;
+		cout<<"ELIJA UN EJERCICIO: ";
+
+
+
+		cin>>opc;
+
+		switch(opc)
+		{
+		case 1:
+		{
+        uno();
+        cout<<endl;
+            break;
+		}
+
+		case 2:
+		{
+        dos();
+        cout<<endl;
+            break;
+		}
+
+		case 3:
+		{
+        tres();
+        cout<<endl;
+            break;
+		}
+		case 4:
+		{
+        cuatro();
+        cout<<endl;
+            break;
+		}
+		case 6:
+		{
+        seis();
+        cout<<endl;
+            break;
+		}
+		case 7:
+		{
+        siete();
+        cout<<endl;
+            break;
+		}
+		}
+	}
+	while(opc!=8);
+}
