@@ -1,0 +1,562 @@
+
+Laboratorio 7
+Herencia
+Ejercicios.
+1. Crear una clase Persona del cual tendrá métodos asignar una edad y nombre. Una segunda clase, alumno, tendrá que heredar este contenido y a través de esta clase poder asignar los datos de edad y nombre de los estudiantes.
+SOLUCIÓN:
+
+Archivos Fuentes:
+Main.cpp:
+#include<iostream>
+#include "Persona.h"
+#include "alumno.h"
+
+using namespace std;
+
+int main (int argc, char *argv[]) {
+	
+	alumno obj1=alumno(25,"raul");
+	obj1.mostrar();
+	
+	return 0;
+}
+
+Persona.cpp:
+#include "Persona.h"
+
+Persona::Persona(int _edad, string _nombre) {
+	edad = _edad;
+	nombre= _nombre;
+}
+
+void Persona::mostrar(){
+	cout<<"el nombre del alumno es: "<<nombre<<" "<<", su edad es: "<<edad;
+}
+
+
+alumno.cpp:
+#include "alumno.h"
+
+alumno::alumno(int _edad, string _nombre):Persona(_edad,_nombre) {
+	
+}
+
+Archivos de cabecera:
+Persona.h:
+#ifndef PERSONA_H
+#define PERSONA_H
+#include<iostream>
+using namespace std;
+
+class Persona {
+public:
+	Persona(int,string);
+	void mostrar();
+protected:
+	string nombre;
+	int edad;
+private:
+};
+
+#endif
+
+Alumno.h:
+#ifndef ALUMNO_H
+#define ALUMNO_H
+#include "Persona.h"
+#include<iostream>
+using namespace std;
+
+class alumno : public Persona{
+public:
+	alumno(int edad, string nombre);
+private:
+};
+
+#endif
+
+
+ 
+
+2. Crear una clase Color que mantenga 3 valores (RGB). Una segunda clase Material, tendrá como información una variable de texto que describa algún material (Ejemplo: madera, vidrio, platico, etc.) Una tercera clase, Objetos, deberá de heredar contenido de ambas clases con la finalidad de describir diferentes objetos en cuanto a color y el material. (Ejemplo: mesa de color café y material de plástico)
+SOLUCIÓN:
+
+Archivos fuente:
+main.cpp:
+#include "Objetos.h"
+
+#include<iostream>
+using namespace std;
+
+int main (int argc, char *argv[]) {
+	Objetos obj1=Objetos("rojo","verde","azul","vidrio","porcelana","madera","verde","porcelana");
+	obj1.mostrar();
+	return 0;
+}
+
+Color.cpp:
+#include "Color.h"
+
+Color::Color(string _r, string _g, string _b) {
+	r=_r;
+	g=_g;
+	b=_b;
+}
+
+Material.cpp:
+#include "Material.h"
+
+Material::Material(string _mat1, string _mat2, string _mat3) {
+	mat1=_mat1;
+	mat2=_mat2;
+	mat3=_mat3;
+}
+
+
+Objetos.cpp:
+#include "Objetos.h"
+#include "Color.h"
+#include "Material.h"
+
+Objetos::Objetos(string _r, string _g, string _b,string _mat1, string _mat2, string _mat3,string _color, string _material):Color(_r,_g,_b),Material(_mat1,_mat2,_mat3) {
+	color=_color;
+	material=_material;
+}
+
+void Objetos::mostrar(){
+	cout<<"el color es: "<<color<<" "<<"el material es: "<<material; 
+}
+
+Archivos cabecera.
+Color.h:
+#ifndef COLOR_H
+#define COLOR_H
+
+#include<iostream>
+using namespace std;
+
+class Color {
+public:
+	Color(string, string, string);
+protected:
+	string r;
+	string g;
+	string b;
+};
+
+#endif
+
+Material.h:
+#ifndef MATERIAL_H
+#define MATERIAL_H
+
+#include<iostream>
+using namespace std;
+
+class Material {
+public:
+	Material(string,string,string);
+protected:
+	string mat1;
+	string mat2;
+	string mat3;
+
+};
+
+#endif
+
+Objetos.h:
+#ifndef OBJETOS_H
+#define OBJETOS_H
+#include "Color.h"
+#include "Material.h"
+
+#include<iostream>
+using namespace std;
+
+class Objetos : public Color, public Material {
+public:
+	string color;
+	string material;
+	Objetos(string,string,string,string,string,string,string,string);
+	void mostrar();
+private:
+};
+
+#endif
+
+3. Dada la siguiente jerarquía de herencia, indica la visibilidad de los atributos de la clase ProductoBancario en las clases CuentaJoven e Hipoteca.
+
+SOLUCIÓN:
+
+Archivos fuente.
+Main.cpp:
+#include <iostream>
+using namespace std;
+
+#include "CuentaJoven.h"
+#include "Hipoteca.h"
+
+int main(){
+	ProductoBancario obj1;
+	obj1.imprimir();
+	Cuenta obj2;
+	obj1.imprimir();
+	Prestamo obj3;
+	obj1.imprimir();
+	CuentaJoven obj4;
+	obj1.imprimir();
+	Hipoteca obj5;
+	obj1.imprimir();	
+}
+
+ProductoBancario.cpp:
+#include "ProductoBancario.h"
+
+ProductoBancario::ProductoBancario() {
+	
+}
+
+ProductoBancario::~ProductoBancario() {
+	
+}
+
+void ProductoBancario::imprimir(){
+	cout<<"imprime ProductoBancario"<<endl;
+}
+
+Cuenta.cpp:
+#include "Cuenta.h"
+
+Cuenta::Cuenta() {
+	
+}
+
+Cuenta::~Cuenta() {
+	
+}
+
+void Cuenta::imprimir(){
+	cout<<"imprime Cuenta"<<endl;
+}
+
+CuentaJoven.cpp:
+#include "CuentaJoven.h"
+
+CuentaJoven::CuentaJoven() {
+	
+}
+
+CuentaJoven::~CuentaJoven() {
+	
+}
+
+void CuentaJoven::imprimir(){
+	cout<<"imprime CuentaJoven";
+}
+
+Prestamo.cpp:
+#include "Prestamo.h"
+
+Prestamo::Prestamo() {
+	
+}
+
+Prestamo::~Prestamo() {
+	
+}
+
+void Prestamo::imprimir(){
+	cout<<"imprime prestamo";
+	
+}
+
+Hipoteca.cpp:
+#include "Hipoteca.h"
+
+Hipoteca::Hipoteca() {
+	
+}
+
+Hipoteca::~Hipoteca() {
+	
+}
+
+void Hipoteca::imprimir(){
+	cout<<"imprime hipoteca";
+}
+
+Archivos cabecera.
+ProductoBancario.h:
+#ifndef PRODUCTOBANCARIO_H
+#define PRODUCTOBANCARIO_H
+
+#include<iostream>
+	using namespace std;
+
+class ProductoBancario {
+
+protected:
+	string cliente;
+	double saldo;
+	int numProductos;
+public:
+	ProductoBancario();
+	~ProductoBancario();
+	void imprimir();
+private:
+};
+
+#endif
+
+Cuenta.h:
+#ifndef CUENTA_H
+#define CUENTA_H
+#include "ProductoBancario.h"
+
+class Cuenta : public ProductoBancario {
+public:
+	Cuenta();
+	void imprimir();
+	~Cuenta();
+private:
+};
+
+#endif
+
+CuentaJoven.h:
+#ifndef CUENTAJOVEN_H
+#define CUENTAJOVEN_H
+
+#include "Cuenta.h"
+
+class CuentaJoven : public Cuenta {
+public:
+	CuentaJoven();
+
+	~CuentaJoven();
+private:
+	void imprimir();	
+
+};
+
+#endif
+
+Prestamo.h:
+#ifndef PRESTAMO_H
+#define PRESTAMO_H
+#include "ProductoBancario.h"
+
+class Prestamo : public ProductoBancario {
+public:
+	Prestamo();
+
+	~Prestamo();
+protected:
+	void imprimir();	
+};
+
+#endif
+
+Hipoteca.h:
+#ifndef HIPOTECA_H
+#define HIPOTECA_H
+
+#include "Prestamo.h"
+
+class Hipoteca : public Prestamo {
+public:
+	Hipoteca();
+	void imprimir();
+	~Hipoteca();
+
+};
+
+#endif
+
+4. Escribe una clase de nombre ClaseDisco, que herede de la clase ClaseMultimedia los atributos y métodos definidos por usted. La clase ClaseDisco tiene, aparte de los elementos heredados, un atributo más también definido por usted. Al momento de imprimir la información debe mostrase por pantalla toda la información.
+
+SOLUCIÓN:
+
+Archivos cabecera:
+ClaseMultimedia.h:
+#ifndef CLASEMULTIMEDIA_H
+#define CLASEMULTIMEDIA_H
+
+#include<iostream>
+using namespace std;
+
+class ClaseMultimedia {
+
+protected:
+	string Nombre;
+	string Productora;
+	string PublicoDirigido;
+	int AnioLanzamiento;
+	int Duracion;
+public:
+	ClaseMultimedia(string,string,string,int,int);
+	~ClaseMultimedia();
+private:
+};
+
+#endif
+
+ClaseDisco.h:
+#ifndef CLASEDISCO_H
+#define CLASEDISCO_H
+#include "ClaseMultimedia.h"
+#include<iostream>
+using namespace std;
+
+class ClaseDisco : public ClaseMultimedia {
+public:
+	ClaseDisco(string,string,string,int,int,string);
+
+	string Artista;
+	void mostrar();
+private:
+};
+
+#endif
+
+Archivos fuente:
+Main.cpp:
+#include<iostream>
+using namespace std;
+#include "ClaseDisco.h"
+
+int main (int argc, char *argv[]) {
+	ClaseDisco obj1=ClaseDisco("Exitos del verano 2022","RCA victor","adulto",2022,3,"nirvana");
+	obj1.mostrar();
+	
+	return 0;
+}
+
+ClaseMultimedia.cpp:
+#include "ClaseMultimedia.h"
+
+ClaseMultimedia::ClaseMultimedia(string _nombre, string _productora, string _publicodirigido, int _aniolanzamiento, int _duracion) {
+	Nombre = _nombre;
+	Productora = _productora;
+	PublicoDirigido = _publicodirigido;
+	AnioLanzamiento = _aniolanzamiento;
+	Duracion = _duracion;	
+}
+
+ClaseMultimedia::~ClaseMultimedia() {
+	
+}
+
+ClaseDisco.cpp:
+#include "ClaseDisco.h"
+
+ClaseDisco::ClaseDisco(string _nombre, string _productora, string _publicodirigido, int _aniolanzamiento, int _duracion, string _artista):ClaseMultimedia(_nombre,_productora,_publicodirigido,_aniolanzamiento,_duracion) {
+	Artista = _artista;
+
+}
+
+void ClaseDisco::mostrar(){
+	cout<<"la informacion total es la siguiente: "<<endl;
+	cout<<"nombre: "<<Nombre<<", "<<"productora: "<<Productora<<", "<<"publico al que esta dirigido: "<<PublicoDirigido<<", ";
+	cout<<"anio de lanzamiento: "<<AnioLanzamiento<<", "<<"duracion: "<<Duracion<<", "<<"artista: "<<Artista;
+}
+
+
+5. Escribe un programa que implemente la siguiente jerarquía de clases
+
+
+SOLUCIÓN:
+
+Archivos fuente:
+Main.cpp:
+#include<iostream>
+using namespace std;
+#include "operacionFactorial.h"
+
+int main (int argc, char *argv[]) {
+	operacionFactorial obj1;
+	obj1.setOperador(1);
+	obj1.getOperador(5);
+	
+	return 0;
+}
+
+operacionBase.cpp:
+#include "operacionBase.h"
+
+#include "operacionFactorial.h"
+operacionBase::operacionBase() {
+	
+}
+
+operacionBase::~operacionBase() {
+	
+}
+
+void operacionBase::setOperador(int o){
+	
+}
+
+int operacionBase::getOperador(int o){
+	
+		operacionFactorial obj2=operacionFactorial();
+		obj2.devolverFactorial(o);
+	
+	return o;
+}
+
+operacionFactorial.cpp:
+
+#include "operacionFactorial.h"
+#include<iostream>
+using namespace std;
+
+operacionFactorial::operacionFactorial() {
+	
+}
+
+operacionFactorial::~operacionFactorial() {
+	
+}
+
+int operacionFactorial::devolverFactorial(int n){
+	for(int i=1;i<n;i++){
+		n=n*i;
+		}
+		cout<<"el factorial es"<<n;
+	return n;
+}
+
+Archivos cabecera:
+operacionBase.h:
+#ifndef OPERACIONBASE_H
+#define OPERACIONBASE_H
+
+class operacionBase {	
+	public:
+	operacionBase();
+	~operacionBase();
+	int operador;
+	void setOperador(int o);
+	int getOperador(int);
+private:
+};
+
+#endif
+
+operacionFactorial.h:
+#ifndef OPERACIONFACTORIAL_H
+#define OPERACIONFACTORIAL_H
+#include "operacionBase.h"
+
+class operacionFactorial : public operacionBase {
+public:
+	operacionFactorial();
+	~operacionFactorial();
+	int devolverFactorial(int);
+private:
+};
+
+#endif
+
