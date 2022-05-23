@@ -1,0 +1,270 @@
+
+Laboratorio 6 Clases
+ 
+
+1.	Implemente un programa con clases que calcule el área de un rectángulo y perímetro.
+SOLUCIÓN:
+
+Archivo de cabecera:
+#ifndef RECTANGULO_H #define RECTANGULO_H
+
+class rectangulo { public:
+float Ancho; float Largo; rectangulo();
+void CalculoArea();
+void CalculoPerimetro();
+};
+
+#endif
+
+Archivo de implementación:
+#include "rectangulo.h" #include <iostream> using namespace std;
+
+
+rectangulo::rectangulo() {
+cout<<"Ingrese el ancho del rectangulo: "; cin>>Ancho;
+cout<<"Ingrese el largo del rectangulo: "; cin>>Largo;
+}
+
+void rectangulo::CalculoArea(){ float area; area=Ancho*Largo;
+cout<<"El area del rectangulo es: "<<area<<endl;
+}
+ 
+
+void rectangulo::CalculoPerimetro(){ float perimetro; perimetro=2*(Ancho+Largo);
+cout<<"El perimetro del rectangulo es: "<<perimetro<<endl;
+}
+
+int main(){
+rectangulo r1; r1.CalculoArea(); r1.CalculoPerimetro();
+}
+
+
+
+2.	Se conoce de un alumno de la Universidad Nacional de San Agustín: CUI, nombre completo y tres notas parciales (nota1, nota2, nota3). El programa con clases debe imprimir: CUI, el primer nombre, el promedio de las tres notas e indique con un mensaje si el alumno aprobó (nota final >= 10.5) o no aprobó (nota final < 10.5) la asignatura de Ciencias de la Computación II.
+SOLUCIÓN:
+
+Archivo de cabecera:
+#ifndef ALUMNOUNSA_H #define ALUMNOUNSA_H
+
+#include <iostream> using namespace std;
+ 
+class AlumnoUnsa { public:
+
+AlumnoUnsa();
+void VerNombreCui(); void Promedio(); string nombre;
+
+private:
+
+int Cui; float nota1; float nota2; float nota3;
+};
+
+#endif
+
+Archivo de Implementación:
+#include "AlumnoUnsa.h" #include <iostream> using namespace std;
+
+AlumnoUnsa::AlumnoUnsa() {
+
+cout<<"Ingrese el nombre del alumno: "; getline(cin,nombre);
+cout<<"Ingrese el CUI del alumno: "; cin>>Cui;
+cout<<"Ingrese la nota parcial 1 del alumno: "; cin>>nota1;
+cout<<"Ingrese la nota parcial 2 del alumno: "; cin>>nota2;
+cout<<"Ingrese la nota parcial 3 del alumno: "; cin>>nota3;
+}
+
+void AlumnoUnsa::VerNombreCui(){
+string aux = nombre.substr(0,nombre.find(" ")); cout<<endl;
+cout<<"Reporte de notas: "<<"CUI: "<<Cui<<" Alumno: "<<aux<<" ";
+
+}
+
+void AlumnoUnsa::Promedio(){
+ 
+float p=0; p=(nota1+nota2+nota3)/3; cout<<"Promedio Final: "<<p<<endl; if (p >= 10.5)
+cout<<"El alumno si aprobo"<<endl; else{
+cout<<"El alumno no aprobo"<<endl;
+}
+}
+
+int main(){
+AlumnoUnsa a1; a1.VerNombreCui(); a1.Promedio();
+}
+
+
+
+
+
+3.	Implemente un programa con clases que lea la fecha de nacimiento y la fecha de hoy y muestre por pantalla el nombre y la edad de la persona.
+
+Archivo de cabecera:
+#ifndef PERSONA_H #define PERSONA_H #include <iostream> using namespace std;
+
+class Persona {
+ 
+public:
+int DiaNac, MesNac, AnioNac; int DiaAct, MesAct, AnioAct; int Nombre;
+Persona();
+~Persona();
+void CalculoEdad(int, int, int, int, int, int); void MostrarNombre();
+void MostrarEdad(int, int, int);
+};
+
+#endif
+
+Archivo de Implementación:
+#include "Persona.h" Persona::Persona() {
+}
+Persona::~Persona(){
+
+}
+
+void Persona::CalculoEdad(int DiaNac, int MesNac, int AnioNac, int DiaAct, int MesAct, int AnioAct){
+int DiaEdad, MesEdad, AnioEdad;
+
+int resto=0;
+int aux1, aux2, aux3;
+
+aux1=AnioAct-AnioNac; aux2=MesNac-MesAct; aux3=DiaNac-DiaAct;
+
+if(MesNac==1)
+resto=31-DiaNac; if(MesNac==2)
+resto=28-DiaNac; if(MesNac==3)
+resto=31-DiaNac; if(MesNac==4)
+resto=30-DiaNac; if(MesNac==5)
+resto=31-DiaNac; if(MesNac==6)
+resto=30-DiaNac;
+ 
+if(MesNac==7)
+resto=31-DiaNac; if(MesNac==8)
+resto=31-DiaNac; if(MesNac==9)
+resto=30-DiaNac; if(MesNac==10)
+resto=31-DiaNac; if(MesNac==11)
+resto=30-DiaNac; if(MesNac==12)
+resto=31-DiaNac;
+
+if(aux2==0 && aux3>0){ AnioEdad = aux1 - 1; DiaEdad = 365 - aux3; MesEdad = 11;
+}
+
+else if(aux2 == 0 && aux3<0){ AnioEdad = aux1;
+DiaEdad = aux3*(-1); MesEdad = 12;
+}
+
+else if(aux2>0){
+AnioEdad = aux1 - 1; MesEdad = 12 - aux2; DiaEdad = DiaAct + resto;
+}
+else if(aux2<0){
+AnioEdad = aux1; MesEdad = aux2*(-1);
+DiaEdad = DiaAct + resto;
+}
+
+cout<<"la persona tiene "<<AnioEdad<<" anios, "<<MesEdad<<" meses, "<<DiaEdad<<" dias";
+
+}
+
+void Persona::MostrarEdad(int dia, int mes, int anio){ cout<<"La edad de la persona es: "<<endl;
+
+}
+
+int main(){
+ 
+
+Persona p1=Persona(); cout<<"Ingrese dia de nacimiento: "; cin>>p1.DiaNac;
+cout<<"Ingrese mes de nacimiento: "; cin>>p1.MesNac;
+cout<<"Ingrese anio de nacimiento: "; cin>>p1.AnioNac;
+cout<<"Ingrese dia actual: "; cin>>p1.DiaAct; cout<<"Ingrese mes actual: "; cin>>p1.MesAct; cout<<"Ingrese anio actual: "; cin>>p1.AnioAct;
+p1.CalculoEdad(p1.DiaNac, p1.MesNac, p1.AnioNac, p1.DiaAct, p1.MesAct, p1.AnioAct);
+return 0;
+}
+
+
+
+
+
+4.	Implemente una aplicación con clases donde una clase contiene un arreglo en el que se pueden almacenar como máximo 5 datos. Debe tener un nuevo dato para almacenarlo, debe existir un método que verifique que el arreglo tenga espacio disponible para guardar el dato. En caso contrario se debe mostrar un mensaje indicando que el arreglo está lleno. Asimismo, debe tener un método para retirar un dato del arreglo, este método debe verificar que, si haya algo para sacar del arreglo, es decir que el arreglo no vaya a estar vacío, en cuyo caso debe desplegar un mensaje diciendo que no hay nada para sacar de arreglo.
+SOLUCIÓN:
+
+ 
+Archivo de cabecera:
+#ifndef ARREGLO5_H #define ARREGLO5_H
+
+class Arreglo5 { public:
+Arreglo5();
+int arr[5]={0};
+void VerificaEspacio(); void RetiraDato();
+};
+
+#endif
+
+Archivo de Implementación:
+#include "Arreglo5.h" #include <iostream> using namespace std;
+
+Arreglo5::Arreglo5() {
+
+}
+
+void Arreglo5::VerificaEspacio(){ int aux = 0;
+for(int i = 0;i < 5;i++){ if(arr[i] == 0){
+aux = aux + 1;
+}
+}
+if(aux == 0)
+cout<<"El arreglo esta lleno"<<endl; else{
+cout<<"Hay espacio disponible para almacenar"<<endl;
+}
+}
+
+void Arreglo5::RetiraDato(){ for(int i=0; i<5; i++){
+while(arr[i]!=0){
+cout<<"Si hay un dato que se puede retirar"<<endl;
+return;
+}
+ 
+}
+cout<<"no hay datos que retirar"<<endl;
+}
+
+int main(){
+Arreglo5 a1; a1.VerificaEspacio(); a1.RetiraDato();
+}
+
+
+
+
+5.	Implementar un programa con clases que haga la búsqueda de un dato almacenado en una matriz de 3x3 que tiene los números de 1 al 9 ingresados aleatoriamente y debe indicar la posición donde se encuentra el dato.
+SOLUCIÓN:
+
+Archivo de cabecera:
+#ifndef MATRIZ9_H #define MATRIZ9_H
+
+class Matriz9 { public:
+int matriz[3][3]; void BuscarDato(int); Matriz9();
+};
+
+#endif
+
+Archivo de Implementación:
+#include "Matriz9.h" #include <iostream> using namespace std;
+
+Matriz9::Matriz9() { int k=0;
+for(int i=0;i<3;i++){ for(int j=0;j<3;j++){
+k=k+1;
+cout<<"Dato "<<k<<": "; cin>>matriz[i][j];
+}
+}
+}
+ 
+
+void Matriz9::BuscarDato(int a){ for(int i=0;i<3;i++){
+for(int j=0;j<3;j++){ if(matriz[i][j]==a)
+cout<<"El dato se encuentra en la fila: "<<i+1<<" y columna "<<j+1;
+}
+}
+}
+
+int main(){
+int aux;
+Matriz9 m1;
+cout<<"Indique el dato del cual quiere saber su ubicacion: ",
+cin>>aux; m1.BuscarDato(aux);
+}
+
