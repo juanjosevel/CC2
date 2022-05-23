@@ -1,0 +1,350 @@
+
+Laboratorio 8
+Polimorfismo
+Ejercicios.
+1. Defina una clase Forma que tenga los siguientes miembros de datos:
+-	Color
+-	Coordenada del centro de la forma (objeto Punto)
+-	Nombre de la forma (char *)
+Y, al menos, las siguientes funciones miembro:
+-	Imprimir
+-	Obtener y cambiar el color
+-	Mover la forma (o sea, su centro)
+Defina una clase derivada Rectángulo que tenga los siguientes miembros como datos:
+-	Lado menor.
+-	Lado mayor.
+Y, al menos, las siguientes funciones miembro:
+-	Imprimir. Debe imprimir qué se trata de un rectángulo mostrando su nombre, color, centro y lado. Debería usarse la función Imprimir de la clase base para realizar parte de este trabajo.
+-	Calcular el área (lado menor * lado mayor).
+-	Calcular el perímetro. (2 * lado menor + 2 * lado mayor).
+-	Cambiar el tamaño del rectángulo. Recibe como parámetro un factor de escala. Así, por ejemplo, si el factor vale 2, el rectángulo duplicará su tamaño y si es 0,5 se reducirá a la mitad.
+Realice un programa que pruebe el funcionamiento de estas clases. Debe crear objetos y comprobar el correcto funcionamiento de las funciones miembro.
+
+SOLUCIÓN:
+
+Archivos fuente:
+Main.cpp:
+#include<iostream>
+using namespace std;
+#include "Forma.h"
+#include "Rectangulo.h"
+#include "Elipse.h"
+#include "Cuadrado.h"
+#include "Circulo.h"
+
+int main (int argc, char *argv[]) {
+	Rectangulo obj1=Rectangulo(4,3);
+	obj1.imprimir();
+}
+
+Forma.cpp:
+#include "Forma.h"
+
+Forma::Forma() {
+	cout<<"introduzca el color: ";
+	cin>>Color;
+	//cout<<"introduzca el nombre: ";
+	//cin>>Nombre;
+	cout<<"introduzca la coordenada X: ";
+	cin>>Cx;
+	cout<<"introduzca la coordenada Y: ";
+	cin>>Cy;	
+}
+
+Forma::~Forma() {
+	
+}
+
+void Forma::cambiarColor(string nuevocolor){
+	Color=nuevocolor;
+	//cout<<"Introduzca el nuevo color";
+	//cin>>nuevocolor;
+	cout<<"el nuevo color es: "<<Color<<endl;	
+}
+
+
+void Forma::moverForma(int nuevox, int nuevoy){
+	Cx=nuevox;
+	Cy=nuevoy;
+	cout<<"las nuevas coordenadas son: "<<Cx<<", "<<Cy<<endl;
+}
+
+
+void Forma::imprimir(){
+	cout<<"La forma es un: "<<Nombre<<", "<<"Su color es: "<<Color<<", su coordenada X es: "<<Cx<<" , su coordenada Y es: "<<Cy<<", ";
+	
+}
+
+Rectángulo.cpp:
+#include "Rectangulo.h"
+
+Rectangulo::Rectangulo(double ladomayor, double ladomenor) {
+	LadoMayor=ladomayor;
+	LadoMenor=ladomenor;
+	Nombre="Rectangulo";
+}
+
+Rectangulo::~Rectangulo() {
+	
+}
+
+void Rectangulo::area(int LadoMenor,int LadoMayor){
+	cout<<"el area es: "<<LadoMenor*LadoMayor<<endl;
+	
+}
+
+void Rectangulo::perimetro(){
+	cout<<"el perimetro es: "<<2*(LadoMenor+LadoMayor);
+}
+
+void Rectangulo::CambioTamanio(){
+	double escala;
+	cout<<"Ingrese la escala: ";
+	cin>>escala;
+	LadoMenor=2*(LadoMenor);
+	LadoMayor=2*(LadoMayor);
+	
+}
+
+void Rectangulo::imprimir(){
+	Forma::imprimir();
+	cout<<"el lado menor es: "<<LadoMenor<<", el lado mayor es: "<<LadoMayor; 
+}
+
+
+
+Archivos cabecera.
+
+Forma.h:
+#ifndef FORMA_H
+#define FORMA_H
+#include<iostream>
+using namespace std;
+
+class Forma {
+public:
+	Forma();
+	~Forma();
+	double Cx;
+	double Cy;
+	string Color;
+	string Nombre;
+	virtual void imprimir();
+
+	void cambiarColor(string);
+	void moverForma(int,int);
+	
+private:
+};
+
+#endif
+
+Rectángulo.h:
+
+#ifndef RECTANGULO_H
+#define RECTANGULO_H
+#include "Forma.h"
+
+class Rectangulo : public Forma {
+public:
+	Rectangulo(double,double);
+	~Rectangulo();
+	double LadoMenor;
+	double LadoMayor;
+	void imprimir();
+	virtual void area(int,int);
+	void perimetro();
+	void CambioTamanio();
+private:
+};
+
+#endif
+
+ 
+
+2. Defina una clase Elipse derivada de forma. Recordatorio: una elipse queda definida por su radio mayor (R) y su radio menor (r), tal que el área de una elipse es igual a π*(R*r).
+
+SOLUCIÓN:
+
+Elipse.h:
+#ifndef ELIPSE_H
+#define ELIPSE_H
+
+#include "Forma.h"
+
+class Elipse : public Forma {
+public:
+	Elipse(float,float);
+	~Elipse();
+	float RadioMayor;
+	float RadioMenor;
+	virtual void area(float,float);
+	void imprimir();
+	
+private:
+};
+
+#endif
+
+Elipse.cpp:
+#include "Elipse.h"
+
+Elipse::Elipse(float radiomayor, float radiomenor) {
+	RadioMayor=radiomayor;
+	RadioMenor=radiomenor;
+	Nombre="Elipse";
+}
+
+Elipse::~Elipse() {
+	
+}
+
+void Elipse::area(float RadioMayor, float RadioMenor){
+	cout<<"El area de la elipse es: "<<(3.1416)*RadioMayor*RadioMenor<<endl;
+}
+
+void Elipse::imprimir(){
+	Forma::imprimir();
+	cout<<"el radio mayor es: "<<RadioMayor<<" , el radio menor es: "<<RadioMenor; 
+}
+
+
+
+3. Defina una clase Cuadrado derivada de la clase Rectángulo.
+
+SOLUCIÓN:
+
+Cuadrado.h:
+#ifndef CUADRADO_H
+#define CUADRADO_H
+#include "Rectangulo.h"
+
+class Cuadrado : public Rectangulo{
+public:
+	Cuadrado(int);
+	~Cuadrado();
+	int Lado;
+	void area(int lado);
+	void imprimir();
+private:
+};
+
+#endif
+
+Cuadrado.cpp:
+#include "Cuadrado.h"
+
+Cuadrado::Cuadrado(int _lado):Rectangulo(0,0) {
+	Lado=_lado;
+	Nombre="Cuadrado";
+}
+
+Cuadrado::~Cuadrado() {
+	
+}
+
+void Cuadrado::area(int lado){
+	cout<<"el area del cuadrado es: "<<lado*lado<<endl;
+}
+
+void Cuadrado::imprimir(){
+	Forma::imprimir();
+	cout<<"Lado del cuadrado: "<<Lado<<endl; 
+}
+
+E
+
+4. Defina una clase Circulo derivada de la clase Elipse.
+
+SOLUCIÓN:
+
+Circulo.h:
+#ifndef CIRCULO_H
+#define CIRCULO_H
+#include "Elipse.h"
+
+class Circulo : public Elipse{
+public:
+	Circulo(double);
+	~Circulo();
+	double radio;
+	void area(double);
+	void imprimir();
+private:
+};
+
+#endif
+
+Circulo.cpp:
+#include "Circulo.h"
+#include<iostream>
+using namespace std;
+
+Circulo::Circulo(double _radio):Elipse(0,0) {
+	radio=_radio;
+	Nombre="Circulo";
+}
+
+Circulo::~Circulo() {
+	
+}
+
+void Circulo::area(double radio){
+	cout<<"El area del circulo es: "<<(3.1416)*radio*radio<<endl;
+	
+}
+
+void Circulo::imprimir(){
+	Forma::imprimir();
+	cout<<"el radio es: "<<radio<<" "<<endl; 
+}
+
+
+
+NOTA: Los ejercicios del 5 al 7 están en una sola solución:
+
+5. Realice un programa que defina varias formas diferentes, cree un vector de punteros de la clase Forma que apunten a los objetos creados. El programa debe realizar un bucle que recorra todas las formas, las ponga todas del mismo color y las mueva a una determinada posición.
+6. Analice qué ocurre en el ejercicio anterior si se intenta imprimir la información de cada forma y qué sucede si se intenta obtener en ese bucle el área de todas las formas del vector.
+7. Utilice la técnica de las funciones virtuales para arreglar los comportamientos anómalos detectados en el ejercicio anterior.
+
+SOLUCIÓN:
+Código implementado en C++:
+Main.cpp:
+#include<iostream>
+using namespace std;
+#include "Forma.h"
+#include "Rectangulo.h"
+#include "Elipse.h"
+#include "Cuadrado.h"
+#include "Circulo.h"
+
+int main (int argc, char *argv[]) {
+	Rectangulo obj1=Rectangulo(4,3);
+	obj1.imprimir();
+	Elipse obj2=Elipse(6,8);
+	Cuadrado obj3=Cuadrado(3);
+	Circulo obj4=Circulo(10);
+
+	obj1.cambiarColor("celeste");
+	obj2.cambiarColor("celeste");
+	obj3.cambiarColor("celeste");
+	obj4.cambiarColor("celeste");
+	
+	obj1.moverForma(3,4);
+	obj2.moverForma(3,4);
+	obj3.moverForma(3,4);
+	obj4.moverForma(3,4);
+
+	obj1.imprimir();
+	obj2.imprimir();
+	obj3.imprimir();
+	obj4.imprimir();
+	
+	obj1.area(4,3);
+	obj2.area(6,8);
+	obj3.area(3);
+	obj4.area(10);
+	
+	return 0;
+}
+
