@@ -1,0 +1,272 @@
+
+Laboratorio 5
+Punteros
+Ejercicios.
+1. Asignar valores a dos variables enteras, intercambie estos valores almacenados usando solo punteros a enteros.
+SOLUCIÓN:
+
+
+#include <iostream>
+using namespace std;
+
+void intercambiarValores(int *first, int *second)
+{
+    int temp1;
+    int temp2;
+    temp1 = *first;
+    temp2 = *second;
+    *first = temp2;
+    *second = temp1;
+    cout<<"El nuevo a es: "<<*first<<endl;
+    cout<<"El nuevo b es: "<<*second<<endl;
+}
+
+int main()
+{
+    int a=12;
+    int b=34;
+
+    int *p1;
+    int *p2;
+
+    p1=&a;
+    p2=&b;
+    cout<<"a es: "<<a<<endl;
+    cout<<"b es: "<<b<<endl;
+    intercambiarValores(p1,p2);
+}
+
+
+ 
+
+2. Cree dos vectores con valores flotantes y asígnele valores aleatorios, para esto deberá de asignar memoria a cada vector. Calcule el producto punto de vectores y muestre por pantalla. Una vez finalizado este proceso, retire la memoria asignada a los punteros. Repita este proceso de asignación y retiro de memoria dentro de un for de 1 000 000 veces.
+SOLUCIÓN:
+1er Caso: Con este código se verifica en un ciclo de 10 repeticiones la operación del producto punto:
+
+
+#include <iostream>
+#include <random>
+#include <ctime>
+using namespace std;
+
+int main()
+{
+  float *arreglo1=NULL;
+  float *arreglo2=NULL;
+
+    srand(time(NULL));
+
+    for(int s=0;s<10;s++){
+
+    arreglo1=new float[10];
+    arreglo2=new float[10];
+
+    float ppunto=0.0;
+
+    for(int j=0;j<10;j++){
+        arreglo1[j]=rand()/3000.0;
+        arreglo2[j]=rand()/3000.0;
+        ppunto=arreglo1[j]*arreglo2[j];
+    }
+
+    cout<<"el producto punto es: "<<ppunto<<endl;
+
+    delete []arreglo1;
+    delete []arreglo2;
+    }
+    return 0;
+}
+
+ 
+
+2do. Caso: Hacer que la operación se repita 1 000 000 de veces:
+
+
+#include <iostream>
+#include <random>
+#include <ctime>
+using namespace std;
+
+int main()
+{
+  float *arreglo1=NULL;
+  float *arreglo2=NULL;
+
+    srand(time(NULL));
+
+    for(int s=0;s<10;s++){
+
+    arreglo1=new float[10];
+    arreglo2=new float[10];
+
+    float ppunto=0.0;
+
+    for(int j=0;j<1000000;j++){
+        arreglo1[j]=rand()/3000.0;
+        arreglo2[j]=rand()/3000.0;
+        ppunto=arreglo1[j]*arreglo2[j];
+    }
+
+    //cout<<"el producto punto es: "<<ppunto<<endl;
+
+    delete []arreglo1;
+    delete []arreglo2;
+    }
+    return 0;
+}
+
+
+ 
+3. Construya una lista enlazada simple utilizando solo punteros. Añada las funciones de insertar y eliminar un elemento. En la función insertar se debe asegurar que los números insertados estén en orden creciente. Simule el proceso con 10000 números aleatorios sin que el programa falle.
+
+SOLUCIÓN:
+
+#include <iostream>
+using namespace std;
+
+class Nodo{
+public:
+    int dato;
+    Nodo *siguiente;
+
+};
+
+void insertar(Nodo *cabeza,int zeta,Nodo *nuevo,Nodo *ultimo){
+
+
+nuevo->dato=zeta;
+ultimo=cabeza;
+if(cabeza->siguiente==NULL){
+        cout<<"queee"<<endl;
+    cabeza->siguiente=nuevo;
+}
+
+else if(cabeza->siguiente!=NULL){
+    while(ultimo->siguiente!=NULL){
+        ultimo=ultimo->siguiente;
+
+}
+ultimo->siguiente=nuevo;
+cout<<"tttttt"<<endl;
+}
+
+
+
+}
+
+void visualizar(Nodo *nuevo){
+while(nuevo!=NULL){
+    cout<<nuevo->dato<<endl;
+    nuevo=nuevo->siguiente;
+}
+
+}
+
+
+int main(){
+
+Nodo *cabeza=new Nodo();
+cabeza->siguiente=NULL;
+cabeza->dato=2;
+Nodo *nuevo=new Nodo();
+Nodo *ultimo=new Nodo();
+insertar(cabeza,34);
+insertar(cabeza,35);
+insertar(cabeza,38);
+insertar(cabeza,76);
+insertar(cabeza,763);
+visualizar(cabeza);
+}
+
+5. Implemente su propia función de concatenación de cadenas de texto especial (¡no es la función ordinaria de concatenación!), recibirá como parámetro dos punteros de caracteres y tendrá que asignar el contenido del segundo puntero al INICIO del primer puntero. La función no retorna ningún valor.
+SOLUCIÓN:
+Código implementado en C++:
+#include<iostream>
+using namespace std;
+
+void concatenar(string *primero, string *segundo){
+string *temp;
+temp=primero;
+primero=segundo;
+segundo=temp;
+
+cout<<*primero<<" "<<*segundo;
+
+
+}
+
+int main(){
+
+string uno="hola";
+string dos="amigo";
+
+string *ptr1;
+string *ptr2;
+
+ptr1=&uno;
+ptr2=&dos;
+
+concatenar(ptr1,ptr2);
+}
+ 
+
+6. Utilizando punteros a funciones, implemente las funciones:
+a. void sumar (int a, int b);
+b. void restar (int a, int b);
+c. void multiplicar (int a, int b);
+d. void dividir (int a, int b);
+Cree un vector de punteros a funciones e implemente un programa que permita la invocación de cada función, pero a través del puntero.
+SOLUCIÓN:
+
+#include <iostream>
+using namespace std;
+
+void suma(double a,double b)
+{
+    cout<<"la suma es: "<<a+b;
+}
+
+void resta(double a,double b)
+{
+    cout<<"la resta es: "<<a-b;
+}
+
+void multiplicacion(double a, double b)
+{
+    cout<<"la multiplicacion es: "<<a*b;
+}
+
+void division(double a,double b)
+{
+    cout<<"la division es: "<<a/b;
+}
+
+int main()
+{
+    double a,b;
+    cout<<"ingrese el 1er numero: ";
+    cin>>a;
+    cout<<"ingrese el 2do numero: ";
+    cin>>b;
+    cout<<endl;
+    cout<<"ESCOJA UNA OPCION DEL MENU"<<endl;
+    cout<<"0. suma"<<endl;
+    cout<<"1. resta"<<endl;
+    cout<<"2. multiplicacion"<<endl;
+    cout<<"3. division"<<endl;
+    cout<<endl;
+    void (*p[4])(double,double)={suma,resta,multiplicacion,division};
+
+    int opc;
+    cout<<"\nOpcion?: ";
+    cin>>opc;
+    while(opc>=0 && opc<=3)
+    {
+        (*p[opc])(a,b);
+        cout<<"\nOpcion?: ";
+        cin>>opc;
+    }
+    return 0;
+}
+
+
