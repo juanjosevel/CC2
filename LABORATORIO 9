@@ -1,0 +1,301 @@
+
+//////////EJERCICIO 1////////////
+
+//1. Se pide escribir una función utilizando plantillas que tome tres argumentos genéricos y devuelva el 
+//menor y el máximo de ellos como valor de retorno. La función debe ser capaz de dar este tipo de resultados.
+
+#include <iostream>
+using namespace std;
+
+template <class T>
+
+class Primero {
+	
+private:
+	T num1, num2, num3;
+	
+public:	
+	Primero (T n1, T n2, T n3) {
+		num1 = n1;
+		num2 = n2;
+		num3 = n3;
+	}
+	
+	T MayoryMenor(){
+		if(num1>num2 && num1>num3){
+			cout<<num1<<" es el numero mayor"<<endl;
+		}
+		if(num2>num1 && num2>num3){
+			cout<<num2<<" es el numero mayor"<<endl;
+		}
+		if(num3>num1 && num3>num2){
+			cout<<num3<<" es el numero mayor"<<endl;
+		}	
+		if(num1<num2 && num1<num3){
+			cout<<num1<<" es el numero menor"<<endl;
+		}
+		if(num2<num1 && num2<num3){
+			cout<<num2<<" es el numero menor"<<endl;
+		}
+		if(num3<num1 && num3<num2){
+			cout<<num3<<" es el numero menor"<<endl;
+		}	
+	}
+};
+
+
+int main() {	
+	
+	Primero<int> p1(20,125,5);
+	Primero<float> p2(2.4, 1.2,23.5);
+	Primero<double> p3(20.259,3.15984,36.15926);
+	
+	cout<<"Prueba con INT: "<<endl;
+	p1.MayoryMenor();
+	cout<<endl;
+	cout<<"Prueba con FLOAT: "<<endl;
+	p2.MayoryMenor();
+	cout<<endl;
+	cout<<"Prueba con DOUBLE: "<<endl;
+	p3.MayoryMenor();
+}
+
+
+/////////////EJERCICIO 2/////////////
+
+//2. Se pide escribir una función utilizando plantillas que tome dos argumentos genéricos de tipo entero 
+//y flotante que devuelva las cuatro operaciones básicas.
+
+
+
+#include <iostream>
+using namespace std;
+
+template <class T1, class T2>
+
+class Operaciones{
+		
+public:
+	T1 num1;
+	T2 num2;
+	Operaciones(T1 n1, T2 n2) {
+		num1 = n1;
+		num2 = n2;
+	}
+	
+	T2 suma() { 
+		return num1+num2;		
+	}
+	
+	T2 resta() { 
+		return num1-num2; 
+	}
+	
+	T2 multiplicacion() { 
+		return num1*num2; 
+	}
+	
+	T2 division() { 
+		return num1/num2; 
+	}
+};
+
+int main(){
+	
+	Operaciones<int,float> obj1(2, 11.25);	
+
+	cout<<"la suma es: "<< obj1.suma()<<endl;
+	cout<<"la resta es: "<<obj1.resta()<<endl;
+	cout<<"la multiplicacion es: "<<obj1.multiplicacion()<<endl;
+	cout <<"la division es: "<<obj1.division()<<endl;	
+	cout << endl;
+}
+
+
+/////////////EJERCICIO 3////////////////
+
+	//3. Se pide escribir una función utilizando plantillas que tome dos valores genéricos de tipo char y 
+	//string (5 veces); char corresponde a una letra y string corresponde al apellido. El programa debe 
+	mostrar por pantalla el siguiente formato de correo electrónico: char/string@unsa.edu.pe.
+
+
+#include <iostream>
+using namespace std;
+
+template <class T1, class T2>
+
+class Correo{
+	
+private:
+	T1 nombre;
+	T2 apellido;
+	
+public:
+	Correo(T1 nom, T2 ap) {
+		nombre = nom;
+		apellido = ap;
+	}
+	
+	void generador() {
+		cout<<nombre<<apellido<<"@unsa.edu.pe"<<endl;		
+	}	
+};
+
+int main(){
+	
+	Correo<char,string> c1('a',"ramirez");
+	Correo<char,string> c2('f',"gonzales");
+	Correo<char,string> c3('j',"ortega");
+	Correo<char,string> c4('w',"crespo");
+	Correo<char,string> c5('u',"almeyda");
+	c1.generador();
+	c2.generador();
+	c3.generador();
+	c4.generador();
+	c5.generador();
+}
+
+
+	////////////7EJERCICIO 4/////////////
+	
+	//4. Implemente un programa que haga uso de plantillas para determinar el mínimo y máximo valor de un 
+	//arreglo de elementos dado. Debe de existir dos funciones, la primera que retorne el mayor de los valores 
+	//y la segunda que retorne el menor de los valores. Asimismo, en la función main, se hace una prueba de 
+	//estas funciones, con arreglos de enteros y flotantes.
+	
+	//int ArrayEntero [5] = {10,7,2, 8, 6};
+	//float ArrayFloat [5] = {12.1, 8.7, 5.6, 8.4, 1.2};
+	
+	
+	
+
+#include <iostream>
+using namespace std;
+
+template <class T>
+
+class Cuatro{
+	
+private:
+	
+	int tamanio;
+	T arr[5];
+	
+public:
+	
+	Cuatro(T _arr[], int _n) {
+		tamanio=_n;
+		for(int i=0;i<tamanio;i++){
+			arr[i]=_arr[i];
+		}
+	}
+		
+	T Mayor(){		
+			
+		for (int i = 0; i < tamanio - 1; i++)	
+			for (int j = 0; j < tamanio - i - 1; j++)
+				if (arr[j] > arr[j + 1])
+					swap(arr[j], arr[j + 1]);
+		return arr[tamanio-1];
+	}
+	
+	T Menor(){		
+			
+		for (int i = 0; i < tamanio - 1; i++)
+			for (int j = 0; j < tamanio - i - 1; j++)
+				if (arr[j] > arr[j + 1])
+					swap(arr[j], arr[j + 1]);
+		return arr[0];
+	}
+};
+
+int main() {
+	
+	int ArrayEntero [5] = {10,7,2,8,6};
+	int a=sizeof(ArrayEntero)/sizeof(ArrayEntero[0]);
+	float ArrayFloat [5] = {12.1, 8.7, 5.6, 8.4, 1.2};
+	int b=sizeof(ArrayFloat)/sizeof(ArrayFloat[0]);
+
+	Cuatro<int> c1(ArrayEntero, a);
+	Cuatro<float> c2(ArrayFloat, b);
+
+	cout<<"MAYOR Y MENOR DEL ARREGLO TIPO INT: "<<endl;
+	cout<<"el mayor es: "<<c1.Mayor()<<endl;
+	cout<<"el menor es: "<<c1.Menor()<<endl;
+	cout<<endl;
+	cout<<"MAYOR Y MENOR DEL ARREGLO TIPO FLOAT: "<<endl;
+	cout<<"el mayor es: "<<c2.Mayor()<<endl;
+	cout<<"el menor es: "<<c2.Menor()<<endl;
+}
+
+
+/////////////EJERCICIO 5/////////////
+
+//5. Realizar la implementación de un programa que haga uso de plantillas, para elaborar una función 
+//que permita ordenar ascendentemente y descendentemente los elementos de un arreglo de valores enteros 
+//y otro arreglo de valores flotantes. Las funciones deben recibir como parámetros, un puntero al tipo 
+//de elemento dado, y dos enteros que indican los índices del primero y último elemento.
+
+//int ArrayEntero [5] = {5,7,2,8,6,1,3,4,9};
+//float ArrayFloat [5] = {10.1, 8.4, 3.6, 4.4, 11.2};
+
+
+#include <iostream>
+using namespace std;
+
+template <class T>
+
+class Cinco{
+
+public:
+	
+	void OrdenarAsc(T *arr, int primero, int ultimo){
+					
+		for (int i = 0; i < ultimo; i++)	
+			for (int j = primero; j < ultimo-i; j++)
+				if (arr[j] > arr[j + 1])
+					swap(arr[j], arr[j + 1]);
+					
+		for(int k=0;k<ultimo+1;k++){
+			cout<<arr[k]<<" ";
+		}
+	}
+
+	void OrdenarDes(T *arr, int primero, int ultimo){
+		for (int i = 0; i < ultimo; i++)	
+			for (int j = primero; j < ultimo-i; j++)
+				if (arr[j] < arr[j + 1])
+					swap(arr[j], arr[j + 1]);
+		
+		for(int k=0;k<ultimo+1;k++){
+			cout<<arr[k]<<" ";
+		}
+	}
+};
+
+int main() {
+	
+	int ArrayEntero [9] = {5,7,2,8,6,1,3,4,9};	
+	float ArrayFloat [5] = {10.1, 8.4, 3.6, 4.4, 11.2};
+	
+	Cinco<int> c1;
+	Cinco<float> c2;
+		
+	cout<<"ORDENAMIENTO DEL ARREGLO TIPO INT: "<<endl;
+	cout<<"Orden Ascendente: "<<endl;
+	c1.OrdenarAsc(ArrayEntero,0,8);
+	cout<<endl;
+	cout<<"Oden Descendente: "<<endl;
+	c1.OrdenarDes(ArrayEntero,0,8);
+	cout<<endl;
+	cout<<endl;
+	cout<<"ORDENAMIENTO DEL ARREGLO TIPO FLOAT: "<<endl;
+	cout<<"Orden Ascendente: "<<endl;
+	c2.OrdenarAsc(ArrayFloat,0,4);
+	cout<<endl;
+	cout<<"Orden Descendente: "<<endl;
+	c2.OrdenarDes(ArrayFloat,0,4);
+	cout<<endl;
+}
+
+
