@@ -1,0 +1,761 @@
+////////////////// UNO /////////////////77
+
+#include<iostream>
+using namespace std;
+
+class Nodo
+{
+public:
+	int dato;
+	Nodo *siguiente;
+};
+
+class Lista
+{
+private:
+	Nodo* Primero;
+public:
+	Lista();
+	void insertar(int dato);
+	void mostrar();
+};
+
+Lista::Lista() { 
+	Primero = NULL;
+}
+
+void Lista::insertar(int dato){ 
+	
+	Nodo* nuevo = new Nodo(); 
+	nuevo->dato = dato;
+	nuevo->siguiente = NULL;
+
+	if(Primero==NULL){
+		 Primero = nuevo;
+		return; 
+	} 
+	
+	Nodo* temporal = Primero; 
+
+	while(temporal->siguiente!=NULL)
+		 temporal = temporal->siguiente;
+	temporal->siguiente = nuevo;
+} 
+
+void Lista::mostrar(){ 
+
+	Nodo* nodo = Primero; 
+	while(nodo!=NULL){ 
+		cout << nodo->dato << "->";
+		nodo = nodo->siguiente; 
+	}
+	cout<<endl;
+}
+
+int main()
+{	int k;
+	Lista* obj1 = new Lista();
+	
+	for(int i=0; i<10; i++){
+		cout<<"Ingrese los datos de los nodos: ";
+		cin>>k;
+		obj1->insertar(k);
+		obj1->mostrar(); 
+	}
+	return 0;
+}
+
+
+
+
+///////////////// DOS //////////////////////77
+
+
+
+#include<iostream>
+using namespace std;
+
+class Nodo
+{
+public:
+	int dato;
+	Nodo *siguiente;
+};
+
+class Lista
+{
+private:
+	Nodo* Primero;
+public:
+	Lista();
+	void insertarInicio(int dato);
+	void mostrar();
+};
+
+Lista::Lista() { 
+	Primero = NULL;
+}
+
+void Lista::insertarInicio(int dato){
+
+	Nodo* nuevo = new Nodo();
+	nuevo->dato = dato;
+	nuevo->siguiente = Primero;
+	Primero = nuevo;
+} 
+
+void Lista::mostrar(){ 
+
+	Nodo* nodo = Primero; 
+	while(nodo!=NULL){ 
+		cout << nodo->dato << "->";
+		nodo = nodo->siguiente; 
+	}
+	cout<<endl;
+}
+
+int main()
+{	int k;
+	Lista* obj1 = new Lista();
+	
+	for(int i=0; i<10; i++){
+		cout<<"Ingrese los datos de los nodos: ";
+		cin>>k;
+		obj1->insertarInicio(k);
+		obj1->mostrar(); 
+	}
+	return 0;
+}
+
+
+
+//////////// TRES //////////////////////77
+
+
+
+
+#include<iostream>
+using namespace std;
+
+class Nodo
+{
+public:
+	int dato;
+	Nodo *siguiente;
+};
+
+class Lista
+{
+private:
+	Nodo* Primero;
+public:
+	Lista();
+	void insertar(int dato);
+	int longitud();
+	void insertarEntreNodos(int pos, int val);
+	void mostrar();
+};
+
+Lista::Lista() { 
+	Primero = NULL;
+}
+
+void Lista::insertar(int dato){
+
+	Nodo* nuevo = new Nodo();
+	nuevo->dato = dato;
+	nuevo->siguiente = Primero;
+	Primero = nuevo;
+} 
+
+
+int Lista::longitud(){ 
+	int tamanio=0; 
+	
+	Nodo* aux = new Nodo(); 
+	aux = Primero; 
+	
+	while(aux!=NULL){ 
+		aux = aux->siguiente;
+		tamanio++;
+	}
+	return tamanio;
+}
+
+void Lista:: insertarEntreNodos(int n, int dato)
+{
+	int tamanio=longitud();
+
+	if(n < 0 || n > tamanio) 
+		cout << "Posicion no valida"; 
+	
+	if(n == 0){ 
+		insertar(dato); 
+	} 
+	
+	else { 
+		Nodo* newNode = new Nodo(); 
+		newNode->dato = dato;
+		newNode->siguiente = NULL;  
+		Nodo* tempNode = Primero; 
+
+		while(--n)
+		tempNode = tempNode->siguiente;
+		
+		newNode->siguiente= tempNode->siguiente;
+		tempNode->siguiente = newNode;
+		cout << newNode->dato <<" es el nodo insertado"<< endl;
+	}
+}
+
+void Lista::mostrar(){ 
+	
+	Nodo* nodo = Primero; 
+	while(nodo!=NULL){ 
+		cout << nodo->dato << "->";
+		nodo = nodo->siguiente; 
+	}
+	cout<<endl;
+}
+
+int main()
+{	int k,t,r;
+Lista* obj1 = new Lista();
+
+for(int i=0; i<10; i++){
+	cout<<"Ingrese los datos de los nodos: ";
+	cin>>k;
+	obj1->insertar(k);
+	obj1->mostrar(); 
+}
+
+cout<<"Indique la posicion en la cual quiere insertar el nodo: ";
+cin>>t;
+cout<<"Ingrese el dato del nodo a insertar: ";
+cin>>r;
+obj1->insertarEntreNodos(t-1,r);
+obj1->mostrar(); 
+return 0;
+}
+
+
+
+
+
+
+
+/////////////CUATRO/////////////////
+
+
+#include<iostream>
+using namespace std;
+
+class Nodo
+{
+public:
+	int dato;
+	Nodo *siguiente;
+};
+
+class Lista
+{
+private:
+	Nodo* Primero;
+public:
+	Lista();
+	void insertar(int dato);
+	void eliminarUltimo();
+	void mostrar();
+};
+
+Lista::Lista() { 
+	Primero = NULL;
+}
+
+void Lista::eliminarUltimo(){
+	Nodo* temp = Primero;
+	Nodo* anterior;
+
+	if(Primero == NULL){
+		cout <<"Lista vacia"; 
+		return; 
+	} 
+
+	if(temp->siguiente == NULL){
+		cout <<"Nodo eliminado: "<< Primero->dato;
+		Primero = NULL;
+		return;
+	}
+
+	while (temp->siguiente != NULL) 
+	{
+		anterior = temp; 
+		temp = temp->siguiente; 
+	}
+	anterior->siguiente = NULL;
+	cout <<"Nodo eliminado: "<< temp->dato<<endl;
+	free(temp);
+}
+
+void Lista::insertar(int dato){ 
+	
+	Nodo* nuevo = new Nodo(); 
+	nuevo->dato = dato;
+	nuevo->siguiente = NULL;
+	
+	if(Primero==NULL){
+		Primero = nuevo;
+		return; 
+	} 
+	
+	Nodo* temporal = Primero; 
+	
+	while(temporal->siguiente!=NULL)
+		temporal = temporal->siguiente;
+	
+	temporal->siguiente = nuevo;
+} 
+
+void Lista::mostrar(){ 
+	
+	Nodo* nodo = Primero; 
+	while(nodo!=NULL){ 
+		cout << nodo->dato << "->";
+		nodo = nodo->siguiente; 
+	}
+	cout<<endl;
+}
+
+int main()
+{	int k;
+Lista* obj1 = new Lista();
+
+for(int i=0; i<10; i++){
+	cout<<"Ingrese los datos de los nodos: ";
+	cin>>k;
+	obj1->insertar(k);
+	obj1->mostrar(); 
+}
+
+obj1->eliminarUltimo();
+cout<<"la lista con el ultimo elemento eliminado es: "<<endl;
+obj1->mostrar(); 
+return 0;
+}
+
+
+
+
+
+
+
+
+///////////CINCO///////////////////7
+
+
+#include<iostream>
+using namespace std;
+
+class Nodo
+{
+public:
+	int dato;
+	Nodo *siguiente;
+};
+
+class Lista
+{
+private:
+	Nodo* Primero;
+public:
+	Lista();
+	void insertar(int dato);
+	void deleteFront();
+	void mostrar();
+};
+
+Lista::Lista() { 
+	Primero = NULL;
+}
+
+void Lista::deleteFront(){
+	Nodo* temp = Primero;
+
+	if(Primero == NULL){
+		cout << "lista vacia" ; 
+		return; 
+	}
+
+	Primero = Primero->siguiente; 
+	cout <<"El nodo eliminado es: "<< temp->dato << endl; 
+	free(temp); 
+}
+
+void Lista::insertar(int dato){ 
+	
+	Nodo* nuevo = new Nodo(); 
+	nuevo->dato = dato;
+	nuevo->siguiente = NULL;
+	
+	if(Primero==NULL){
+		Primero = nuevo;
+		return; 
+	} 
+	
+	Nodo* temporal = Primero; 
+	while(temporal->siguiente!=NULL)
+		temporal = temporal->siguiente;
+	
+	temporal->siguiente = nuevo;
+} 
+
+void Lista::mostrar(){ 
+	
+	Nodo* nodo = Primero; 
+	while(nodo!=NULL){ 
+		cout << nodo->dato << "->";
+		nodo = nodo->siguiente; 
+	}
+	cout<<endl;
+}
+
+int main()
+{	int k;
+Lista* obj1 = new Lista();
+
+for(int i=0; i<10; i++){
+	cout<<"Ingrese los datos de los nodos: ";
+	cin>>k;
+	obj1->insertar(k);
+	obj1->mostrar(); 
+}
+
+obj1->deleteFront();
+cout<<"la lista con el primer nodo eliminado es: "<<endl;
+obj1->mostrar(); 
+return 0;
+}
+
+
+
+
+
+
+
+
+
+
+////////////////SEIS////////////////////7
+
+
+
+#include<iostream>
+using namespace std;
+
+class Nodo
+{
+public:
+	int dato;
+	Nodo *siguiente;
+};
+
+class Lista
+{
+private:
+	Nodo* Primero;
+public:
+	Lista();
+	void insertar(int dato);
+	int longitud();
+	void eliminarNodo(int n);
+	void mostrar();
+};
+
+Lista::Lista() { 
+	Primero = NULL;
+}
+
+void Lista::eliminarNodo(int n)
+{
+	Nodo* temp = Primero;
+	Nodo* anterior;
+	int tamanio = longitud();
+	
+	if(n < 1 || n > tamanio){
+		cout << "Posicion no valida"; 
+		return; 
+	} 
+
+	if(n == 1) { 
+		Primero = Primero->siguiente;
+		cout <<"El nodo eliminado es: "<< temp->dato << endl; 
+		delete(temp); 
+		return; 
+	}
+
+	while (--n) 
+	{ 
+		anterior = temp; 
+		temp = temp->siguiente; 
+	}
+	anterior->siguiente = temp->siguiente;
+	cout <<"El nodo eliminado es: "<< temp->dato << endl; 
+	delete(temp); 
+} 
+
+int Lista::longitud(){ 
+	Nodo* aux = new Nodo(); 
+	aux = Primero; 
+	
+	int tamanio = 0; 
+	
+	while(aux!=NULL){ 
+		aux = aux->siguiente;
+		tamanio++;
+	}
+	return tamanio;
+}
+
+void Lista::insertar(int dato){ 
+	
+	Nodo* nuevo = new Nodo(); 
+	nuevo->dato = dato;
+	nuevo->siguiente = NULL;
+	
+	if(Primero==NULL){
+		Primero = nuevo;
+		return; 
+	} 
+	Nodo* temporal = Primero; 
+
+	while(temporal->siguiente!=NULL)
+		temporal = temporal->siguiente;
+	
+	temporal->siguiente = nuevo;
+} 
+
+void Lista::mostrar(){ 
+	
+	Nodo* nodo = Primero; 
+	while(nodo!=NULL){ 
+		cout << nodo->dato << "->";
+		nodo = nodo->siguiente; 
+	}
+	cout<<endl;
+}
+
+int main()
+{	int k,t;
+Lista* obj1 = new Lista();
+
+for(int i=0; i<10; i++){
+	cout<<"Ingrese los datos de los nodos: ";
+	cin>>k;
+	obj1->insertar(k);
+	obj1->mostrar(); 
+}
+cout<<"Ingrese la posicion del nodo a eliminar: ";
+cin>>t;
+obj1->eliminarNodo(t);
+obj1->mostrar(); 
+return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////SIETE///////////////////7
+
+
+#include <iostream>
+using namespace std;
+
+class Nodo {
+	
+public:
+	int dato;
+	Nodo* siguiente;
+	Nodo(int x)
+	{
+		dato = x;
+		siguiente = NULL;
+	}
+};
+
+class Lista {
+	
+public:
+	Nodo* Primero;
+	Nodo* orden;
+	void insertar(int);
+	void ordenarLista(Nodo*);
+	void formaAscendente(Nodo*);
+	void mostrar(Nodo* Primero);
+};
+
+void Lista::insertar(int dato)
+	{
+		Nodo* nuevo = new Nodo(dato);
+		nuevo->siguiente = Primero;
+		Primero=nuevo;
+	}
+	
+void Lista::ordenarLista(Nodo* referencia)
+	{
+		orden = NULL;
+		Nodo* temporal = referencia;
+		while (temporal != NULL) {
+			Nodo* siguiente = temporal->siguiente;
+			formaAscendente(temporal);
+			temporal = siguiente;
+		}
+		Primero = orden;
+	}
+
+void Lista::formaAscendente(Nodo* n)
+	{
+		if (orden == NULL || orden->dato >= n->dato) {
+			n->siguiente = orden;
+			orden = n;
+		}
+		else {
+			Nodo* aux = orden;
+			while (aux->siguiente != NULL && aux->siguiente->dato < n->dato) {
+				aux=aux->siguiente;
+			}
+			n->siguiente=aux->siguiente;
+			aux->siguiente=n;
+		}
+	}
+
+void Lista::mostrar(Nodo* Primero)
+	{
+		while (Primero != NULL) {
+			cout << Primero->dato << "->";
+			Primero = Primero->siguiente;
+		}
+		cout<<endl;
+	}
+
+
+int main()
+{	int k;
+	Lista obj1;
+	obj1.Primero = NULL;
+	for(int i=0; i<10; i++){
+		cout<<"Ingrese los datos de los nodos: ";
+		cin>>k;
+		obj1.insertar(k);
+		obj1.mostrar(obj1.Primero); 
+	}
+	cout << endl;
+	obj1.ordenarLista(obj1.Primero);
+	cout <<"Lista en orden ascendente"<<endl;
+	obj1.mostrar(obj1.Primero);
+}
+
+
+
+
+
+
+
+//////////////////7OCHO/////////////////7
+
+
+#include <iostream>
+using namespace std;
+
+class Nodo {
+	
+public:
+	int dato;
+	Nodo* siguiente;
+	Nodo(int x)
+	{
+		dato = x;
+		siguiente = NULL;
+	}
+};
+
+class Lista {
+	
+public:
+	Nodo* Primero;
+	Nodo* orden;
+	void insertar(int);
+	void ordenarLista(Nodo*);
+	void formaAscendente(Nodo*);
+	void mostrar(Nodo* Primero);
+};
+
+void Lista::insertar(int dato)
+{
+	Nodo* nuevo = new Nodo(dato);
+	nuevo->siguiente = Primero;
+	Primero=nuevo;
+}
+
+void Lista::ordenarLista(Nodo* referencia)
+{
+	orden = NULL;
+	Nodo* temporal = referencia;
+	while (temporal != NULL) {
+		Nodo* siguiente = temporal->siguiente;
+		formaAscendente(temporal);
+		temporal = siguiente;
+	}
+	Primero = orden;
+}
+
+void Lista::formaAscendente(Nodo* n)
+{
+	if (orden == NULL || orden->dato <= n->dato) {
+		n->siguiente = orden;
+		orden = n;
+	}
+	else {
+		Nodo* aux = orden;
+		while (aux->siguiente != NULL
+			   && aux->siguiente->dato > n->dato) {
+			aux=aux->siguiente;
+		}
+		n->siguiente=aux->siguiente;
+		aux->siguiente=n;
+	}
+}
+
+void Lista::mostrar(Nodo* Primero)
+{
+	while (Primero != NULL) {
+		cout << Primero->dato << "->";
+		Primero = Primero->siguiente;
+	}
+	cout<<endl;
+}
+
+
+int main()
+{	int k;
+Lista obj1;
+obj1.Primero = NULL;
+for(int i=0; i<10; i++){
+	cout<<"Ingrese los datos de los nodos: ";
+	cin>>k;
+	obj1.insertar(k);
+	obj1.mostrar(obj1.Primero); 
+}
+cout << endl;
+obj1.ordenarLista(obj1.Primero);
+cout <<"Lista en orden descendente"<<endl;
+obj1.mostrar(obj1.Primero);
+}
