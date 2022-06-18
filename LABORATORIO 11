@@ -1,0 +1,327 @@
+///////////////////UNO/////////////////////
+
+#include <iostream>
+using namespace std;
+
+class Nodo{
+public:
+	int dato;
+	Nodo *siguiente=NULL;  
+};
+
+class Pila{
+	Nodo *Primero=NULL;
+public:
+	void insertarEnPila(int);  
+	void mostrarPila(); 
+};
+
+void Pila::insertarEnPila(int n) {
+	Nodo *temporal = new Nodo; 
+	temporal -> dato = n; 
+	temporal -> siguiente = Primero;   
+	Primero = temporal;  
+}
+
+void Pila::mostrarPila() {
+	Nodo *temporal = Primero;
+	while (temporal != NULL) {  
+		cout << temporal -> dato << "->";
+		temporal = temporal -> siguiente;
+	}
+	cout << endl;
+}
+
+int main() {
+	Pila obj1;
+	int k;
+	for(int i=0; i<10; i++){
+		cout<<"Ingrese el dato del nuevo nodo de la pila: ";
+		cin>>k;
+		obj1.insertarEnPila(k);
+		obj1.mostrarPila(); 
+	}
+	return 0;
+}
+
+
+
+//////////////////DOS//////////////////////
+
+#include <iostream>
+using namespace std;
+
+class Nodo{
+public:
+	int dato;
+	Nodo *siguiente=NULL;  
+};
+
+class Pila{
+	Nodo *Primero=NULL;
+public:
+	void insertarEnPila(int);
+	void eliminarDePila();
+	void mostrarPila(); 
+	~Pila();
+};
+
+void Pila::insertarEnPila(int n){
+	Nodo *temporal = new Nodo; 
+	temporal -> dato = n; 
+	temporal -> siguiente = Primero;   
+	Primero = temporal;  
+}
+
+void Pila::eliminarDePila() {
+	if (Primero == NULL) {   
+		cout <<"La pila está vacia"<<endl;
+	}
+	else {
+		Nodo *temporal = Primero;
+		cout << temporal -> dato <<" se elimina de la pila"<<endl; 
+		Primero = Primero -> siguiente; 
+		delete temporal;  
+	}
+}
+
+void Pila::mostrarPila() {
+	Nodo *temporal = Primero;
+	while (temporal != NULL) {  
+		cout << temporal -> dato << "->";
+		temporal = temporal -> siguiente;
+	}
+	cout << endl;
+}
+
+Pila::~Pila(){ 
+	
+	while(Primero != NULL) {
+		Nodo *temporal = Primero;
+		Primero = Primero -> siguiente;
+		delete temporal;
+	}
+}
+	
+	int main() {
+		Pila obj1;
+		int k;
+		for(int i=0; i<10; i++){
+			cout<<"Ingrese el dato del nuevo nodo de la pila: ";
+			cin>>k;
+			obj1.insertarEnPila(k);
+			obj1.mostrarPila(); 
+		}
+		cout<<endl;
+		obj1.mostrarPila(); 
+		for(int i=0; i<10; i++){
+			obj1.eliminarDePila();
+			obj1.mostrarPila(); 
+		}
+	}
+	
+
+///////////7/////TRES/////////////////////
+
+#include <iostream>
+	using namespace std;
+	
+	class Nodo{
+	public:
+		int dato;
+		Nodo *siguiente=NULL;  
+	};
+	
+	class Pila{
+		Nodo *Primero=NULL;
+	public:
+		void insertarEnPila(int);
+		void eliminarDePila();
+		void mostrarPila();
+		void buscarElementoEnPila(int);
+	};
+	
+	void Pila::insertarEnPila(int n){
+		Nodo *temporal = new Nodo; 
+		temporal -> dato = n; 
+		temporal -> siguiente = Primero;   
+		Primero = temporal;  
+	}
+	
+	void Pila::buscarElementoEnPila(int n){  
+		Nodo *temporal = Primero;  
+		int i=0,aux=0; 
+		if(Primero == NULL){  
+			cout<<"La lista esta vacia"<<endl;  
+		}  
+		else{   
+			while (temporal!=NULL){  
+				if(temporal->dato == n){  
+					cout<<"El valor fue encontrado en la posicion "<<(i+1)<<" de la pila"<<endl;
+					aux=0;
+				} 
+				else{ 
+					aux++; 
+				} 
+				i++; 
+				temporal = temporal->siguiente;  
+			}  
+			if(aux==10){  
+				cout<<n<<" no se encuentra en la pila"<<endl;  
+			}  
+		}  
+	}
+	
+	void Pila::mostrarPila() {
+		Nodo *temporal = Primero;
+		while (temporal != NULL) {  
+			cout << temporal -> dato << "->";
+			temporal = temporal -> siguiente;
+		}
+		cout << endl;
+	}
+	
+	int main() {
+		Pila obj1;
+		int k,t;
+		for(int i=0; i<10; i++){
+			cout<<"Ingrese el dato del nuevo nodo de la pila: ";
+			cin>>k;
+			obj1.insertarEnPila(k);
+			obj1.mostrarPila(); 
+		}
+		cout<<endl;
+		cout<<"Ingrese el dato que quiere buscar en la pila: ";
+		cin>>t;
+		obj1.buscarElementoEnPila(t);
+	}
+	
+
+/////////////////CUATRO///////////////////
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+class Pila{
+public:
+	int nroDiscos;
+	int contador;
+	int *arr;
+	Pila *Elemento;
+	Pila *generarPila(int);
+	bool pilaConMaximoNroDiscos(Pila*);
+	bool pilaVacia(Pila*);
+	void insertarEnPila(Pila*, int);
+	int eliminarDePila(Pila*);
+	void mostrarDesplazamiento(int, char, char);
+	void pasarDisco(Pila*, Pila*, char, char);
+	void Hanoi(int, Pila*, Pila*, Pila*);
+};
+
+Pila* generarPila(int nroDiscos){
+	Pila* pilaHanoi= new Pila;
+	pilaHanoi->nroDiscos=nroDiscos;
+	pilaHanoi->contador=-1;
+	pilaHanoi->arr=new int[nroDiscos];
+	return pilaHanoi;
+}
+
+bool pilaConMaximoNroDiscos(Pila* pilaHanoi){
+	if(pilaHanoi->contador == pilaHanoi->nroDiscos - 1)
+		return true;
+	else
+		return false;
+}
+
+bool pilaVacia(Pila* pilaHanoi){
+	if(pilaHanoi->contador ==-1)
+		return true;
+	else
+		return false;
+}
+
+void insertarEnPila(Pila* pilaHanoi, int element){
+	if(pilaConMaximoNroDiscos(pilaHanoi))
+		return;
+
+	pilaHanoi->arr[++pilaHanoi->contador]= element;
+}
+
+int eliminarDePila(Pila* pilaHanoi){
+	if(pilaVacia(pilaHanoi))
+		return -1;
+
+	return(pilaHanoi->arr[pilaHanoi->contador--]);
+}
+
+void mostrarDesplazamiento(int disco, char PilaOrigen, char PilaDestino){
+	cout<<"Se mueve el disco "<<disco<<" de la pila "<<PilaOrigen<<" a la pila "<<PilaDestino<<endl;
+}
+
+void pasarDisco(Pila *origen, Pila*destino, char s, char d){
+	int aux1=eliminarDePila(origen);
+	int aux2=eliminarDePila(destino);
+	if (aux1 == -1){
+		insertarEnPila(origen,aux2);
+		mostrarDesplazamiento(aux2, d, s);
+	}
+	else if (aux2 ==-1){
+		insertarEnPila( destino,aux1);
+		mostrarDesplazamiento(aux1, s, d);
+	}
+	else if (aux1>aux2){
+		insertarEnPila(origen, aux1);
+		insertarEnPila(origen, aux2);
+		mostrarDesplazamiento(aux2, d, s);
+	}
+	else{
+		insertarEnPila(destino,aux2);
+		insertarEnPila(destino,aux1);
+		mostrarDesplazamiento(aux1, s, d);
+	}
+}
+
+void Hanoi(int discos, Pila *origen, Pila *aux, Pila *destino){
+	char s='A', d='B', a='C';
+	if (discos % 2== 0){
+		char aux=d;
+		d=a;
+		a=aux;
+	}
+
+	int pasos=pow(2, discos)-1;
+	for (int i =discos; i>=1; i--){
+		insertarEnPila(origen,i);
+	}
+
+	for (int i = 1; i <=pasos; i++)
+	{
+		if (i%3==0)
+			pasarDisco(aux, destino, a, d);
+		else if (i%3==2)
+			pasarDisco(origen,aux, s, a);
+		else if (i%3==1)
+			pasarDisco(origen,destino, s, d);
+	}
+}
+
+int main()
+{
+	int k;
+	Pila* origen;
+	Pila* destino;
+	Pila* aux;
+	cout<<"Ingrese el numero de discos: ";
+	cin>>k;
+
+	origen=generarPila(k);
+	aux=generarPila(k);
+	destino=generarPila(k);
+	Hanoi(k,origen, aux, destino);
+
+	delete origen;
+	delete aux;
+	delete destino;
+	return 0;
+}
