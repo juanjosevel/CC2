@@ -1,0 +1,379 @@
+//////////////////////////////UNO//////////////////
+
+//#include <bits/stdc++.h>
+#include <iostream>
+using namespace std;
+
+class Nodo {
+public:
+	int dato;
+	Nodo* siguiente;
+	Nodo(int);
+};
+
+Nodo::Nodo(int d){
+	dato = d;
+	siguiente = NULL;	
+}
+
+class Cola{
+public:
+	Nodo *primero;
+	Nodo *ultimo;
+	Cola();
+	void insertarEnCola(int);
+	void mostrarCola();
+};
+
+Cola::Cola(){
+	primero = ultimo = NULL;
+}
+
+void Cola::insertarEnCola(int x){
+	
+	Nodo* temp = new Nodo(x);
+	if (ultimo == NULL){
+		primero = ultimo = temp;
+		return;
+	}
+	ultimo->siguiente = temp;
+	ultimo = temp;
+}	
+
+void Cola::mostrarCola(){ 
+	
+	Nodo* nodo = primero; 
+	while(nodo!=NULL){ 
+		cout << nodo->dato << "->";
+		nodo = nodo->siguiente; 
+	}
+	cout<<endl;
+}
+
+int main(){	
+	Cola* obj1 = new Cola();
+	int k;
+
+	for(int i=0; i<10; i++){
+		cout<<"Ingrese el dato del nuevo nodo en la cola: ";
+		cin>>k;
+		obj1->insertarEnCola(k);
+		obj1->mostrarCola(); 
+	}
+}
+
+
+
+
+
+//////////////////////////////   DOS    //////////////////
+
+//#include <bits/stdc++.h>
+#include <iostream>
+using namespace std;
+
+class Nodo {
+public:
+	int dato;
+	Nodo* siguiente;
+	Nodo(int);
+};
+
+Nodo::Nodo(int d){
+	dato = d;
+	siguiente = NULL;	
+}
+
+class Cola{
+public:
+	Nodo *primero;
+	Nodo *ultimo;
+	Cola();
+	void insertarEnCola(int);
+	void eliminarDeCola();
+	void mostrarCola();
+};
+
+Cola::Cola(){
+	primero = ultimo = NULL;
+}
+
+void Cola::insertarEnCola(int x){
+	
+	Nodo* temp = new Nodo(x);
+	if (ultimo == NULL){
+		primero = ultimo = temp;
+		return;
+	}
+	ultimo->siguiente = temp;
+	ultimo = temp;
+}	
+
+void Cola::eliminarDeCola(){
+
+	if (primero == NULL){
+		cout<<"La cola está vacia"<<endl;
+		return;
+	}	
+	Nodo* temp = primero;
+	primero = primero->siguiente;
+	cout<<temp->dato<<" eliminado de la cola"<<endl;
+	if (primero == NULL)
+		ultimo = NULL;
+
+	delete (temp);
+}
+
+void Cola::mostrarCola(){ 
+	
+	Nodo* nodo = primero; 
+	while(nodo!=NULL){ 
+		cout << nodo->dato << "->";
+		nodo = nodo->siguiente; 
+	}
+	cout<<endl;
+}
+
+int main(){	
+	Cola* obj1 = new Cola();
+	int k;
+	
+	for(int i=0; i<10; i++){
+		cout<<"Ingrese el dato del nuevo nodo en la cola: ";
+		cin>>k;
+		obj1->insertarEnCola(k);
+		obj1->mostrarCola(); 
+	}
+	
+	obj1->mostrarCola(); 
+	for(int i=0; i<10; i++){
+		obj1->eliminarDeCola();
+		obj1->mostrarCola(); 
+	}
+}
+
+
+
+
+
+
+//////////////////////////////  TRES  //////////////////
+
+
+#include <iostream>
+using namespace std;
+
+class Nodo {
+public:
+	int dato;
+	Nodo* siguiente;
+	Nodo(int);
+};
+
+Nodo::Nodo(int d){
+	dato = d;
+	siguiente = NULL;	
+}
+
+class Cola{
+public:
+	Nodo *primero;
+	Nodo *ultimo;
+	Cola();
+	void insertarEnCola(int);
+	void buscarElementoEnCola(int);
+	void mostrarCola();
+};
+
+Cola::Cola(){
+	primero = ultimo = NULL;
+}
+
+void Cola::insertarEnCola(int x){
+	
+	Nodo* temp = new Nodo(x);
+	if (ultimo == NULL){
+		primero = ultimo = temp;
+		return;
+	}
+	ultimo->siguiente = temp;
+	ultimo = temp;
+}	
+
+void Cola::buscarElementoEnCola(int n){  
+	Nodo *temporal = primero;  
+	int i=0,aux=0; 
+	if(primero == NULL){  
+		cout<<"La cola esta vacia"<<endl;  
+	}  
+	else{   
+		while (temporal!=NULL){  
+			if(temporal->dato == n){  
+				cout<<"El valor fue encontrado en la posicion "<<(i+1)<<" de la cola"<<endl;
+				aux=0;
+			} 
+			else{ 
+				aux++; 
+			} 
+			i++; 
+			temporal = temporal->siguiente;  
+		}  
+		if(aux==10){  
+			cout<<n<<" no se encuentra en la cola"<<endl;  
+		}  
+	}  
+}
+
+void Cola::mostrarCola(){ 
+	
+	Nodo* nodo = primero; 
+	while(nodo!=NULL){ 
+		cout << nodo->dato << "->";
+		nodo = nodo->siguiente; 
+	}
+	cout<<endl;
+}
+
+int main(){	
+	Cola* obj1 = new Cola();
+	int k, t;
+	
+	for(int i=0; i<10; i++){
+		cout<<"Ingrese el dato del nuevo nodo en la cola: ";
+		cin>>k;
+		obj1->insertarEnCola(k);
+		obj1->mostrarCola(); 
+	}
+	cout<<endl;
+	cout<<"Ingrese el dato que quiere buscar en la pila: ";
+	cin>>t;
+	obj1->buscarElementoEnCola(t);	
+}
+
+
+/////////////////////CUATRO////////////////////////
+
+#include <iostream>
+using namespace std;
+
+class Nodo {
+public:
+	int dato;
+	Nodo* siguiente;
+	Nodo(int);
+};
+
+Nodo::Nodo(int d){
+	dato = d;
+	siguiente = NULL;	
+}
+
+class Cola{
+public:
+	Nodo *primero;
+	Nodo *ultimo;
+	Cola();
+	void insertarEnCola(int);
+	int eliminarDeCola();
+	void mostrarCola();
+	void iteracionCola(Cola*);
+};
+
+Cola::Cola(){
+	primero = ultimo = NULL;
+}
+
+void Cola::insertarEnCola(int x){
+	
+	Nodo* temp = new Nodo(x);
+	if (ultimo == NULL){
+		primero = ultimo = temp;
+		return;
+	}
+	ultimo->siguiente = temp;
+	ultimo = temp;
+}	
+
+
+
+int Cola::eliminarDeCola(){
+	
+	int aux=0;
+	if (primero == NULL){
+		cout<<"La cola está vacia"<<endl;
+		return 0;
+	}	
+	Nodo* temp = primero;
+	primero = primero->siguiente;
+	aux=temp->dato;
+	if (primero == NULL)
+		ultimo = NULL;
+	
+	delete (temp);
+	return aux;
+}
+
+void Cola::iteracionCola(Cola *ite){
+	
+	int aux=0;
+	aux=ite->eliminarDeCola();
+	ite->insertarEnCola(aux);
+	ite->mostrarCola(); 	
+}
+
+
+void Cola::mostrarCola(){ 
+	
+	Nodo* nodo = primero; 
+	while(nodo!=NULL){ 
+		cout << nodo->dato << "->";
+		nodo = nodo->siguiente; 
+	}
+	cout<<endl;
+}
+
+int main(){	
+	Cola* cola1 = new Cola();
+	Cola* cola2 = new Cola();
+	
+	int k1, k2, n, c1, c2;
+	
+	cout<<"Numero de nodos en la cola 1: ";
+	cin>>c1;
+	for(int i=0; i<c1; i++){
+		cout<<"Edad del nuevo nodo en la cola 1: ";
+		cin>>k1;
+		cola1->insertarEnCola(k1);
+		cola1->mostrarCola(); 
+	}
+
+	cout<<"Numero de nodos en la cola 2: ";
+	cin>>c2;
+	for(int i=0; i<c2; i++){
+		cout<<"Edad del nuevo nodo en la cola 2: ";
+		cin>>k2;
+		cola2->insertarEnCola(k2);
+		cola2->mostrarCola(); 
+	}	
+	
+	cout<<"Ingrese el numero de iteraciones: ";
+	cin>>n;
+	
+	for(int i=0;i<n;i++){	
+	cout<<"I T E R A C I O N "<<i+1<<":"<<endl;
+	cout<<"Cola 1: ";
+	cola1->iteracionCola(cola1);
+	cout<<"Cola 2: ";
+	cola2->iteracionCola(cola2);
+	}
+	
+	if(cola1->primero->dato > cola2->primero->dato){
+		cout<<"la edad en la cola 1 es mayor"<<endl;
+	}
+	else if(cola1->primero->dato < cola2->primero->dato){
+		cout<<"la edad en la cola 2 es mayor"<<endl;
+	}
+	else{
+		cout<<"la edades son iguales"<<endl;
+	}
+}
