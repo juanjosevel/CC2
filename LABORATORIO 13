@@ -1,0 +1,197 @@
+1. Implementar un programa que maneje un arreglo de estructuras para almacenar los 
+	nombres y las fechas de cumpleaños de sus n compañeros. Y debe mostrarse por 
+	pantalla quienes cumplen años en este mes.
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct fecha{
+	int dia;
+	int mes;
+	int anio;
+};
+
+struct companiero{
+	string nombre;
+	fecha cumpleanios;
+};
+
+int main(){
+	int n;
+	cout<<"Ingrese el numero de companieros: ";
+	cin>>n;
+	cin.ignore();
+	companiero* obj = new companiero[n];
+	
+	for(int i=0; i<n; i++){
+		cout<<"ingrese el nombre del companiero: ";
+		getline(cin, obj[i].nombre);
+		cout<<"ingrese el dia de nacimiento: ";
+		cin>>obj[i].cumpleanios.dia;
+		cout<<"ingrese el mes de nacimiento: ";
+		cin>>obj[i].cumpleanios.mes;
+		cout<<"ingrese el anio de nacimento: ";
+		cin>>obj[i].cumpleanios.anio;
+		cin.ignore();
+	}
+	
+	for(int i=0; i<n; i++){
+		if(obj[i].cumpleanios.mes == 6)
+			cout<<obj[i].nombre<<" cumple anios este mes"<<endl;
+	}
+	delete[] obj;
+}
+
+
+
+2. Implementar un programa que maneje un arreglo de estructuras que calcule la 
+	nota final del Ciencia de la Computación. El programa debe permitir el ingreso 
+	de cualquier cantidad de alumnos y para cada alumno, se podrá ingresar nombre, 
+	grupo, nota de la primera fase, segunda fase, tercera fase y proyecto final. 
+	El porcentaje de cada ítem es 15%, 20%, 25% y 40% respectivamente.
+
+#include <iostream>
+using namespace std;
+
+struct alumno{
+	string nombre;
+	char grupo;
+	double notaFase1;
+	double notaFase2;
+	double notaFase3;
+	double notaProyecto;
+};
+
+void notaFinal(double, double, double, double);
+
+int main(){
+	int len;
+	cout<<"Ingrese la cantidad de alumnos: ";
+	cin>>len;
+	cin.ignore();
+	alumno* obj = new alumno[len];
+	for(int i=0; i<len;i++){
+		cout<<"Ingrese nombre del alumno: ";
+		getline(cin, obj[i].nombre);
+		cout<<"Ingrese su grupo: ";
+		cin>>obj[i].grupo;
+		cout<<"Ingrese nota de la fase 1: ";
+		cin>>obj[i].notaFase1;	
+		cout<<"Ingrese nota de la fase 2: ";
+		cin>>obj[i].notaFase2;	
+		cout<<"Ingrese nota de la fase 3: ";
+		cin>>obj[i].notaFase3;
+		cout<<"Ingrese nota del proyecto: ";
+		cin>>obj[i].notaProyecto;
+		cin.ignore();
+	}
+	
+	for(int j=0;j<len;j++){
+		cout<<"El promedio de "<<obj[j].nombre<<" es: ";
+		notaFinal(obj[j].notaFase1, obj[j].notaFase2, obj[j].notaFase3, obj[j].notaProyecto);
+	}
+	delete[] obj;
+}
+
+void notaFinal(double a, double b, double c, double d){
+	double promedio=0;
+	promedio=(0.15*a)+(0.2*b)+(0.25*c)+(0.4*d);
+	cout<<promedio<<endl;;
+}
+
+3. Implemente un programa que maneje un arreglo de estructuras que solicite el 
+	nombre, edad y talla de 10 jugadores, debe mostrar por pantalla los que son 
+	menores de 20 años y tienen una talla mayor a 1,70 mts de altura.
+
+#include <iostream>
+using namespace std;
+
+struct jugador{
+	string nombre;
+	int edad;
+	double talla;
+};
+
+void destacado(int ,double, string);
+	
+int main(){
+	jugador obj[10];
+	for(int i=0; i<10; i++){
+		cout<<"Ingrese el nombre del jugador "<<i+1<<":";
+		getline(cin, obj[i].nombre);
+		cout<<"Ingrese su edad: ";
+		cin>>obj[i].edad;
+		cout<<"Ingrese su talla: ";
+		cin>>obj[i].talla;
+		cin.ignore();
+	}
+	for(int i=0; i<10; i++){
+		destacado(obj[i].edad, obj[i].talla, obj[i].nombre);
+	}
+}
+
+void destacado(int a, double b, string n){
+		if(a<20 && b>1.7)
+			cout<<n<<" tiene menos de 20 anios y mide mas de 1.70"<<endl;
+	}
+
+
+	
+4. Implemente un programa que maneje un arreglo de estructuras que solicite 
+	nombre, sexo y sueldo de los empleados de una empresa y debe mostrar por 
+	pantalla el menor y mayor sueldo.
+	
+#include <iostream>
+using namespace std;
+
+struct empleado{
+	string nombre;
+	char sexo;
+	double sueldo;
+};
+
+void ordenarSueldos(double[], int);
+
+int main(){
+	int n;
+	
+	cout<<"Ingrese el numero de empleados: ";
+	cin>>n;
+	cin.ignore();
+	
+	double arrSueldo[n];
+	
+	empleado* obj = new empleado[n];
+	for(int i=0; i<n; i++){
+		cout<<"Ingrese el nombre del empleado "<<i+1<<":";
+		getline(cin, obj[i].nombre);
+		cout<<"Ingrese el sexo del empleado (m/f): ";
+		cin>>obj[i].sexo;
+		cout<<"Ingrese el sueldo del empleado: ";
+		cin>>obj[i].sueldo;
+		cin.ignore();
+	}
+	for(int i=0; i<n; i++){
+		arrSueldo[i]=obj[i].sueldo;
+	}
+	ordenarSueldos(arrSueldo, n);
+	
+	delete[] obj;
+}
+
+void ordenarSueldos(double arr[], int n){
+	int temp;
+	for(int i=0; i<n; i++){
+		for(int j=0; j<(n-i); j++){
+			if(arr[j]<arr[j+1]){
+				temp=arr[j];
+				arr[j]=arr[j+1];
+				arr[j+1]=temp;				
+			}
+		}
+	}
+	cout<<"el menor sueldo es: "<<arr[n-1]<<endl;
+	cout<<"el mayor sueldo es: "<<arr[0]<<endl;
+}
+	
